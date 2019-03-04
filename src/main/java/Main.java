@@ -27,7 +27,7 @@ import javax.swing.*;
 import java.awt.*;
 
 //Class definition
-public class Main extends JFrame implements Constants {
+public class Main extends JFrame {
 	//Variables
 	private static JFrame frame;
 	private static Board board;
@@ -43,11 +43,11 @@ public class Main extends JFrame implements Constants {
 			e.printStackTrace();
 		}
 		frame = new JFrame("Brick Breaker 1.2");
-		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
+		board = new Board(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 
 		pane = frame.getContentPane();
 		pane.add(board);

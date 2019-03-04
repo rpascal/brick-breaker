@@ -36,14 +36,14 @@ import java.util.TreeMap;
 import java.awt.Toolkit.*;
 
 //Class definition
-public class Board extends JPanel implements Runnable, Constants {
+public class Board extends JPanel implements Runnable {
 	//Items on-screen
 	private Paddle paddle;
 	private Ball ball;
 	private Brick[][] brick = new Brick[10][5];
 
 	//Initial Values for some important variables
-	private int score = 0, lives = MAX_LIVES, bricksLeft = MAX_BRICKS, waitTime = 3, xSpeed, level = 1;
+	private int score = 0, lives = Constants.MAX_LIVES, bricksLeft = Constants.MAX_BRICKS, waitTime = 3, xSpeed, level = 1;
 
 	//The game
 	private Thread game;
@@ -52,15 +52,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	private ArrayList<Item> items = new ArrayList<Item>();
 	private AtomicBoolean isPaused = new AtomicBoolean(true);
 
-	//Colors for the bricks
-	private Color[] blueColors = {BLUE_BRICK_ONE, BLUE_BRICK_TWO, BLUE_BRICK_THREE, Color.BLACK};
-	private Color[] redColors = {RED_BRICK_ONE, RED_BRICK_TWO, RED_BRICK_THREE, Color.BLACK};
-	private Color[] purpleColors = {PURPLE_BRICK_ONE, PURPLE_BRICK_TWO, PURPLE_BRICK_THREE, Color.BLACK};
-	private Color[] yellowColors = {YELLOW_BRICK_ONE, YELLOW_BRICK_TWO, YELLOW_BRICK_THREE, Color.BLACK};
-	private Color[] pinkColors = {PINK_BRICK_ONE, PINK_BRICK_TWO, PINK_BRICK_THREE, Color.BLACK};
-	private Color[] grayColors = {GRAY_BRICK_ONE, GRAY_BRICK_TWO, GRAY_BRICK_THREE, Color.BLACK};
-	private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
-	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
+
 
 	//Constructor
 	public Board(int width, int height) {
@@ -69,8 +61,8 @@ public class Board extends JPanel implements Runnable, Constants {
 		setFocusable(true);
 
 		makeBricks();
-		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
-		ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
+		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
+		ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
 
 
 		game = new Thread(this);
@@ -83,11 +75,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	public void makeBricks() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 5; j++) {
-				Random rand = new Random();
-				int itemType = rand.nextInt(3) + 1;
-				int numLives = 3;
-				Color color = colors[rand.nextInt(7)][0];
-				brick[i][j] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
+				brick[i][j] = new Brick(i, j);
 			}
 		}
 	}
@@ -164,17 +152,17 @@ public class Board extends JPanel implements Runnable, Constants {
 			if (paddle.caughtItem(tempItem)) {
 				items.remove(i);
 			}
-			else if (tempItem.getY() > WINDOW_HEIGHT) {
+			else if (tempItem.getY() > Constants.WINDOW_HEIGHT) {
 				items.remove(i);
 			}
 		}
 	}
 
 	public void checkLives() {
-		if (bricksLeft == NO_BRICKS) {
+		if (bricksLeft == Constants.NO_BRICKS) {
 
 			ball.reset();
-			bricksLeft = MAX_BRICKS;
+			bricksLeft = Constants.MAX_BRICKS;
 			makeBricks();
 			lives++;
 			level++;
@@ -183,7 +171,7 @@ public class Board extends JPanel implements Runnable, Constants {
 			stop();
 			isPaused.set(true);
 		}
-		if (lives == MIN_LIVES) {
+		if (lives == Constants.MIN_LIVES) {
 			repaint();
 			stop();
 			isPaused.set(true);
@@ -269,7 +257,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	}
 
 	public void checkIfOut(int y1) {
-		if (y1 > PADDLE_Y_START + 10) {
+		if (y1 > Constants.PADDLE_Y_START + 10) {
 			lives--;
 			score -= 100;
 			ball.reset();
@@ -279,18 +267,6 @@ public class Board extends JPanel implements Runnable, Constants {
 		}
 	}
 
-	//plays different music throughout game if user wants to
-	public void playMusic(String[] songs, int yesNo, int level) {
-		if (yesNo == 1) {
-			return;
-		}
-		else if (yesNo == -1) {
-			System.exit(0);
-		}
-		if (level == 10) {
-			level = 1;
-		}
-	}
 
 	//fills the board
 	@Override
@@ -314,7 +290,7 @@ public class Board extends JPanel implements Runnable, Constants {
 			i.draw(g);
 		}
 
-		if (lives == MIN_LIVES) {
+		if (lives == Constants.MIN_LIVES) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0,0,getWidth(),getHeight());
 			g.setColor(Color.WHITE);
@@ -331,7 +307,7 @@ public class Board extends JPanel implements Runnable, Constants {
 		public void keyPressed(KeyEvent ke) {
 			int key = ke.getKeyCode();
 			if (key == KeyEvent.VK_SPACE) {
-				if (lives > MIN_LIVES) {
+				if (lives > Constants.MIN_LIVES) {
 					if (isPaused.get() == false) {
 						stop();
 						isPaused.set(true);
@@ -342,9 +318,9 @@ public class Board extends JPanel implements Runnable, Constants {
 				}
 				else {
 					paddle.setWidth(getWidth()/7);
-					lives = MAX_LIVES;
+					lives = Constants.MAX_LIVES;
 					score = 0;
-					bricksLeft = MAX_BRICKS;
+					bricksLeft = Constants.MAX_BRICKS;
 					level = 1;
 					makeBricks();
 					isPaused.set(true);

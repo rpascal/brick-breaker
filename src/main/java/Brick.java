@@ -27,20 +27,27 @@ import java.awt.*;
 import java.util.Random;
 
 //Class definition
-public class Brick extends Structure implements Constants {
+public class Brick extends Structure  {
 	//Variables
 	private int lives, hits;
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
-	private Color[] blueColors = {BLUE_BRICK_ONE, BLUE_BRICK_TWO, BLUE_BRICK_THREE, Color.BLACK};
-	private Color[] redColors = {RED_BRICK_ONE, RED_BRICK_TWO, RED_BRICK_THREE, Color.BLACK};
-	private Color[] purpleColors = {PURPLE_BRICK_ONE, PURPLE_BRICK_TWO, PURPLE_BRICK_THREE, Color.BLACK};
-	private Color[] yellowColors = {YELLOW_BRICK_ONE, YELLOW_BRICK_TWO, YELLOW_BRICK_THREE, Color.BLACK};
-	private Color[] pinkColors = {PINK_BRICK_ONE, PINK_BRICK_TWO, PINK_BRICK_THREE, Color.BLACK};
-	private Color[] grayColors = {GRAY_BRICK_ONE, GRAY_BRICK_TWO, GRAY_BRICK_THREE, Color.BLACK};
-	private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
-	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
+	//Colors for the bricks
+
+
+
+	public Brick(int i, int j) {
+		this(
+				(i * Constants.BRICK_WIDTH),
+				((j * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
+				Constants.BRICK_WIDTH - 5,
+				Constants.BRICK_HEIGHT - 5,
+				Constants.colors[(new Random()).nextInt(7)][0],
+				3,
+				(new Random()).nextInt(3) + 1);
+	}
+
 
 	//Constructor
 	public Brick(int x, int y, int width, int height, Color color, int lives, int itemType) {
@@ -57,7 +64,7 @@ public class Brick extends Structure implements Constants {
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed
-		item = new Item(x + (width / 4), y + (height / 4), ITEM_WIDTH, ITEM_HEIGHT, itemColor, itemType);
+		item = new Item(x + (width / 4), y + (height / 4), Constants.ITEM_WIDTH, Constants.ITEM_HEIGHT, itemColor, itemType);
 	}
 
 	//Draws a brick
@@ -80,26 +87,26 @@ public class Brick extends Structure implements Constants {
 
 	//Change color to get lighter until the brick is destroyed
 	public void nextColor() {
-		if (color == colors[0][0] || color == colors[0][1] || color == colors[0][2]) {
-			color = blueColors[hits];
+		if (color == Constants.colors[0][0] || color == Constants.colors[0][1] || color == Constants.colors[0][2]) {
+			color = Constants.blueColors[hits];
 		}
-		if (color == colors[1][0] || color == colors[1][1] || color == colors[1][2]) {
-			color = redColors[hits];
+		if (color == Constants.colors[1][0] || color == Constants.colors[1][1] || color == Constants.colors[1][2]) {
+			color = Constants.redColors[hits];
 		}
-		if (color == colors[2][0] || color == colors[2][1] || color == colors[2][2]) {
-			color = purpleColors[hits];
+		if (color == Constants.colors[2][0] || color == Constants.colors[2][1] || color == Constants.colors[2][2]) {
+			color = Constants.purpleColors[hits];
 		}
-		if (color == colors[3][0] || color == colors[3][1] || color == colors[3][2]) {
-			color = yellowColors[hits];
+		if (color == Constants.colors[3][0] || color == Constants.colors[3][1] || color == Constants.colors[3][2]) {
+			color = Constants.yellowColors[hits];
 		}
-		if (color == colors[4][0] || color == colors[4][1] || color == colors[4][2]) {
-			color = pinkColors[hits];
+		if (color == Constants.colors[4][0] || color == Constants.colors[4][1] || color == Constants.colors[4][2]) {
+			color = Constants.pinkColors[hits];
 		}
-		if (color == colors[5][0] || color == colors[5][1] || color == colors[5][2]) {
-			color = grayColors[hits];
+		if (color == Constants.colors[5][0] || color == Constants.colors[5][1] || color == Constants.colors[5][2]) {
+			color = Constants.grayColors[hits];
 		}
-		if (color == colors[6][0] || color == colors[6][1] || color == colors[6][2]) {
-			color = greenColors[hits];
+		if (color == Constants.colors[6][0] || color == Constants.colors[6][1] || color == Constants.colors[6][2]) {
+			color = Constants.greenColors[hits];
 		}
 	}
 
@@ -161,4 +168,6 @@ public class Brick extends Structure implements Constants {
 	public boolean isDestroyed() {
 		return destroyed;
 	}
+
+
 }

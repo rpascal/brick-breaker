@@ -26,7 +26,7 @@
 import java.awt.Color;
 
 //Class definition
-public interface Constants {
+public class Constants {
 	//Window Size
 	public static final int WINDOW_WIDTH = 500;
 	public static final int WINDOW_HEIGHT = 500;
@@ -86,4 +86,15 @@ public interface Constants {
 	public static final int ITEM_BIGGER = 1;
 	public static final int ITEM_SMALLER = 2;
 	public static final int ITEM_EMPTY = 3;
+
+
+	public static final Color[] blueColors = {Constants.BLUE_BRICK_ONE, Constants.BLUE_BRICK_TWO, Constants.BLUE_BRICK_THREE, Color.BLACK};
+	public static final Color[] redColors = {Constants.RED_BRICK_ONE, Constants.RED_BRICK_TWO, Constants.RED_BRICK_THREE, Color.BLACK};
+	public static final Color[] purpleColors = {Constants.PURPLE_BRICK_ONE, Constants.PURPLE_BRICK_TWO, Constants.PURPLE_BRICK_THREE, Color.BLACK};
+	public static final Color[] yellowColors = {Constants.YELLOW_BRICK_ONE, Constants.YELLOW_BRICK_TWO, Constants.YELLOW_BRICK_THREE, Color.BLACK};
+	public static final Color[] pinkColors = {Constants.PINK_BRICK_ONE, Constants.PINK_BRICK_TWO, Constants.PINK_BRICK_THREE, Color.BLACK};
+	public static final Color[] grayColors = {Constants.GRAY_BRICK_ONE, Constants.GRAY_BRICK_TWO, Constants.GRAY_BRICK_THREE, Color.BLACK};
+	public static final Color[] greenColors = {Constants.GREEN_BRICK_ONE, Constants.GREEN_BRICK_TWO, Constants.GREEN_BRICK_THREE, Color.BLACK};
+	public static final Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
+
 }

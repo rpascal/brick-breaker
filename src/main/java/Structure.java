@@ -26,10 +26,14 @@
 import java.awt.*;
 
 //Class definition
-public class Structure implements Constants {
+public class Structure {
 	//Variables
 	protected int x, y, width, height;
 	protected Color color;
+
+	public Structure(){
+
+	}
 
 	//Constructor
 	public Structure(int x, int y, int width, int height, Color color) {

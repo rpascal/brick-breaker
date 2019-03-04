@@ -26,7 +26,7 @@
 import java.awt.*;
 
 //Class definition
-public class Ball extends Structure implements Constants {
+public class Ball extends Structure {
 	//Variables
 	private boolean onScreen;
 	private int xDir = 1, yDir = -1;
@@ -52,8 +52,8 @@ public class Ball extends Structure implements Constants {
 
 	//Resets the ball to original position at center of screen
 	public void reset() {
-		x = BALL_X_START;
-		y = BALL_Y_START;
+		x = Constants.BALL_X_START;
+		y = Constants.BALL_Y_START;
 		xDir = 1;
 		yDir = -1;
 	}

@@ -27,7 +27,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 //Class definition
-public class Paddle extends Structure implements Constants {
+public class Paddle extends Structure {
 	//Variables
 	private int xSpeed;
 
@@ -45,8 +45,8 @@ public class Paddle extends Structure implements Constants {
 
 	//Places the paddle back in starting position at center of screen
 	public void reset() {
-		x = PADDLE_X_START;
-		y = PADDLE_Y_START;
+		x = Constants.PADDLE_X_START;
+		y = Constants.PADDLE_Y_START;
 	}
 
 	//Checks if the ball hit the paddle
