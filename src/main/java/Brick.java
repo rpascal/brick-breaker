@@ -23,7 +23,12 @@
 //This "Brick" class extends the "Structure" class. It is for the bricks used in the game.
 
 //Imports
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 //Class definition
@@ -33,19 +38,27 @@ public class Brick extends Structure  {
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
+	private int row;
+	private int col;
+
+	List<ActionListener> onDestoryEvents = new ArrayList<ActionListener>();
+
 	//Colors for the bricks
 
 
 
-	public Brick(int i, int j) {
+	public Brick(int row, int col) {
 		this(
-				(i * Constants.BRICK_WIDTH),
-				((j * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
+				(row * Constants.BRICK_WIDTH),
+				((col * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
 				Constants.BRICK_WIDTH - 5,
 				Constants.BRICK_HEIGHT - 5,
 				Constants.colors[(new Random()).nextInt(7)][0],
-				3,
+				1,
 				(new Random()).nextInt(3) + 1);
+
+		this.row = row;
+		this.col = col;
 	}
 
 
@@ -154,6 +167,9 @@ public class Brick extends Structure  {
 
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
+		for(ActionListener onDestroy: onDestoryEvents){
+			onDestroy.actionPerformed(new ActionEvent(this, 0, ""));
+		}
 	}
 
 	//Accessor methods
