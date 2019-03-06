@@ -1,86 +1,119 @@
 /*
-*    Brick Breaker, Version 1.2
-*    By Ty-Lucas Kelley
-*	
-*	 **LICENSE**
-*
-*	 This file is a part of Brick Breaker.
-*
-*	 Brick Breaker is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation, either version 3 of the License, or
-*    (at your option) any later version.
-*
-*    Brick Breaker is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-*    GNU General Public License for more details.
-*
-*    You should have received a copy of the GNU General Public License
-*    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ *    Brick Breaker, Version 1.2
+ *    By Ty-Lucas Kelley
+ *
+ *	 **LICENSE**
+ *
+ *	 This file is a part of Brick Breaker.
+ *
+ *	 Brick Breaker is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    Brick Breaker is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 //This "Ball" class extends the "Structure" class. It is for the ball used in the game.
 
 //Imports
+
+import javax.swing.*;
 import java.awt.*;
 
 //Class definition
 public class Ball extends Structure {
-	//Variables
-	private boolean onScreen;
-	private int xDir = 1, yDir = -1;
+    //Variables
+    private boolean onScreen;
+    private int xDir = 1, yDir = -1;
+    private Board parent;
 
-	//Constructor
-	public Ball(int x, int y, int width, int height, Color color) {
-		super(x, y, width, height, color);
-		setOnScreen(true);
-	}
+    public Ball(Board parent) {
+        this(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
+        this.parent = parent;
+    }
 
-	//Draw the ball
-	@Override
-	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillOval(x, y, width, height);
-	}
+    //Constructor
+    public Ball(int x, int y, int width, int height, Color color) {
+        super(x, y, width, height, color);
+        setOnScreen(true);
+    }
 
-	//Moves the ball
-	public void move() {
-		x += xDir;
-		y += yDir;
-	}
+    //Draw the ball
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval(x, y, width, height);
+    }
 
-	//Resets the ball to original position at center of screen
-	public void reset() {
-		x = Constants.BALL_X_START;
-		y = Constants.BALL_Y_START;
-		xDir = 1;
-		yDir = -1;
-	}
+    //Moves the ball
+    public void move() {
+        x += xDir;
+        y += yDir;
+    }
 
-	//Mutator methods
-	public void setXDir(int xDir) {
-		this.xDir = xDir;
-	}
+    //Resets the ball to original position at center of screen
+    public void reset() {
+        x = Constants.BALL_X_START;
+        y = Constants.BALL_Y_START;
+        xDir = 1;
+        yDir = -1;
+    }
 
-	public void setYDir(int yDir) {
-		this.yDir = yDir;
-	}
+    //Mutator methods
+    public void setXDir(int xDir) {
+        this.xDir = xDir;
+    }
 
-	public void setOnScreen(boolean onScreen) {
-		this.onScreen = onScreen;
-	}
+    public void invertX() {
+        this.xDir = -this.xDir;
+    }
 
-	//Accessor methods
-	public int getXDir() {
-		return xDir;
-	}
+    public void invertY() {
+        this.yDir = -this.yDir;
+    }
 
-	public int getYDir() {
-		return yDir;
-	}
 
-	public boolean isOnScreen() {
-		return onScreen;
-	}
+    public void setYDir(int yDir) {
+        this.yDir = yDir;
+    }
+
+    public void setOnScreen(boolean onScreen) {
+        this.onScreen = onScreen;
+    }
+
+    //Accessor methods
+    public int getXDir() {
+        return xDir;
+    }
+
+    public int getYDir() {
+        return yDir;
+    }
+
+    public boolean isOnScreen() {
+        return onScreen;
+    }
+
+
+    public void checkCollisions() {
+        if (getX() >= parent.getWidth() - getWidth() || getX() <= 0) {
+            invertX();
+        }
+        if (getY() <= 0 || getY() >= parent.getHeight()) {
+            invertY();
+        }
+
+        if (getY() > Constants.PADDLE_Y_START + 10) {
+            parent.outOfBounds();
+        }
+    }
+
+
 }

@@ -46,7 +46,7 @@ public class Item extends Structure {
 	}
 
 	//Drop the item down towards the paddle at slow pace
-	public void drop() {
+	public void tick() {
 		y += 1;
 	}
 

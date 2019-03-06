@@ -29,24 +29,24 @@ import javax.swing.*;
 import java.lang.Thread;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.List;
 
 //Class definition
 public class Board extends JPanel implements Runnable {
     //Items on-screen
     private Paddle paddle;
     private Ball ball;
-    //	private Brick[][] brick = new Brick[10][5];
+
     private java.util.List<Brick> bricks = new ArrayList<Brick>();
+    private ArrayList<Item> items = new ArrayList<>();
 
-    //Initial Values for some important variables
-    private int score = 0, lives = Constants.MAX_LIVES, bricksLeft = Constants.MAX_BRICKS, waitTime = 3, xSpeed;
+    private int score = 0, lives = Constants.MAX_LIVES, bricksLeft = Constants.MAX_BRICKS, waitTime = 3;
 
-    //The game
     private Thread game;
 
-    //Data structures to handle high scores
-    private ArrayList<Item> items = new ArrayList<>();
+    List<ActionListener> onClearBricksListners = new ArrayList<>();
+    List<ActionListener> onOutOfBoundsListners = new ArrayList<>();
+    List<ActionListener> onLoseListners = new ArrayList<>();
 
 
     //Constructor
@@ -54,11 +54,29 @@ public class Board extends JPanel implements Runnable {
         super.setSize(width, height);
         addKeyListener(new BoardListener());
         setFocusable(true);
+        ball = new Ball(this);
 
         makeBricks();
-        paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
-        ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
+        paddle = new Paddle(ball, this);
 
+
+        onClearBricksListners.add(e -> {
+            ball.reset();
+            bricksLeft = Constants.MAX_BRICKS;
+            makeBricks();
+            lives++;
+            score += 100;
+        });
+
+        onLoseListners.add(e -> {
+            resetGame();
+        });
+
+        onOutOfBoundsListners.add(e -> {
+            lives--;
+            score -= 100;
+            ball.reset();
+        });
 
         game = new Thread(this);
         game.start();
@@ -70,7 +88,7 @@ public class Board extends JPanel implements Runnable {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
-                Brick brick = new Brick(i, j);
+                Brick brick = new Brick(i, j, ball);
 
                 brick.onDestoryEvents.add(e -> {
                     bricksLeft--;
@@ -84,30 +102,18 @@ public class Board extends JPanel implements Runnable {
     }
 
 
-
     //runs the game
     public void run() {
-        xSpeed = 1;
         while (true) {
-            int x1 = ball.getX();
-            int y1 = ball.getY();
 
-            //Makes sure speed doesnt get too fast/slow
-            if (Math.abs(xSpeed) > 1) {
-                if (xSpeed > 1) {
-                    xSpeed--;
-                }
-                if (xSpeed < 1) {
-                    xSpeed++;
-                }
-            }
 
-            checkPaddle(x1, y1);
-            checkWall(x1, y1);
-            checkBricks(x1, y1);
-            checkIfOut(y1);
+            collisions();
+
             ball.move();
-            dropItems();
+
+            for (Item item : items) {
+                item.tick();
+            }
             checkItemList();
 
             checkLives();
@@ -122,17 +128,18 @@ public class Board extends JPanel implements Runnable {
         }
     }
 
+    private void collisions() {
+        paddle.checkCollisions();
+        for (Brick brick : bricks) {
+            brick.checkCollisions();
+        }
+        ball.checkCollisions();
+    }
+
     public void addItem(Item i) {
         items.add(i);
     }
 
-    public void dropItems() {
-        for (int i = 0; i < items.size(); i++) {
-            Item tempItem = items.get(i);
-            tempItem.drop();
-            items.set(i, tempItem);
-        }
-    }
 
     public void checkItemList() {
         for (int i = 0; i < items.size(); i++) {
@@ -145,89 +152,22 @@ public class Board extends JPanel implements Runnable {
 
     public void checkLives() {
         if (bricksLeft == Constants.NO_BRICKS) {
-
-            ball.reset();
-            bricksLeft = Constants.MAX_BRICKS;
-            makeBricks();
-            lives++;
-            score += 100;
-
+            for (ActionListener onClearBricks : onClearBricksListners) {
+                onClearBricks.actionPerformed(new ActionEvent(this, 0, "bricks cleared"));
+            }
         }
         if (lives == Constants.MIN_LIVES) {
-            resetGame();
-        }
-    }
-
-    public void checkPaddle(int x1, int y1) {
-        if (paddle.hitPaddle(x1, y1) && ball.getXDir() < 0) {
-            ball.setYDir(-1);
-            xSpeed = -1;
-            ball.setXDir(xSpeed);
-        }
-        if (paddle.hitPaddle(x1, y1) && ball.getXDir() > 0) {
-            ball.setYDir(-1);
-            xSpeed = 1;
-            ball.setXDir(xSpeed);
-        }
-
-        if (paddle.getX() <= 0) {
-            paddle.setX(0);
-        }
-        if (paddle.getX() + paddle.getWidth() >= getWidth()) {
-            paddle.setX(getWidth() - paddle.getWidth());
-        }
-    }
-
-    public void checkWall(int x1, int y1) {
-        if (x1 >= getWidth() - ball.getWidth()) {
-            xSpeed = -Math.abs(xSpeed);
-            ball.setXDir(xSpeed);
-        }
-        if (x1 <= 0) {
-            xSpeed = Math.abs(xSpeed);
-            ball.setXDir(xSpeed);
-        }
-        if (y1 <= 0) {
-            ball.setYDir(1);
-        }
-        if (y1 >= getHeight()) {
-            ball.setYDir(-1);
-        }
-    }
-
-    public void checkBricks(int x1, int y1) {
-
-        for (Brick brick : bricks) {
-            if (brick.hitBottom(x1, y1)) {
-                ball.setYDir(1);
-
-            }
-            if (brick.hitLeft(x1, y1)) {
-                xSpeed = -xSpeed;
-                ball.setXDir(xSpeed);
-
-            }
-            if (brick.hitRight(x1, y1)) {
-                xSpeed = -xSpeed;
-                ball.setXDir(xSpeed);
-
-            }
-            if (brick.hitTop(x1, y1)) {
-                ball.setYDir(-1);
-
+            for (ActionListener onLose : onLoseListners) {
+                onLose.actionPerformed(new ActionEvent(this, 0, "on lose"));
             }
         }
-
     }
 
-    public void checkIfOut(int y1) {
-        if (y1 > Constants.PADDLE_Y_START + 10) {
-            lives--;
-            score -= 100;
-            ball.reset();
+    public void outOfBounds() {
+        for (ActionListener onOutOfBounds : onOutOfBoundsListners) {
+            onOutOfBounds.actionPerformed(new ActionEvent(this, 0, "on out of bounds"));
         }
     }
-
 
     //fills the board
     @Override
@@ -250,7 +190,7 @@ public class Board extends JPanel implements Runnable {
         }
     }
 
-    public void resetGame(){
+    public void resetGame() {
         paddle.setWidth(getWidth() / 7);
         lives = Constants.MAX_LIVES;
         score = 0;
@@ -259,7 +199,6 @@ public class Board extends JPanel implements Runnable {
     }
 
 
-    //Private class that handles gameplay and controls
     private class BoardListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent ke) {
@@ -270,17 +209,6 @@ public class Board extends JPanel implements Runnable {
             }
             if (key == KeyEvent.VK_RIGHT) {
                 paddle.setX(paddle.getX() + 50);
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent ke) {
-            int key = ke.getKeyCode();
-            if (key == KeyEvent.VK_LEFT) {
-                paddle.setX(paddle.getX());
-            }
-            if (key == KeyEvent.VK_RIGHT) {
-                paddle.setX(paddle.getX());
             }
         }
     }
