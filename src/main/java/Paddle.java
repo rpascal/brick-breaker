@@ -91,4 +91,19 @@ public class Paddle extends Structure {
         }
     }
 
+    public void tick(){
+
+    }
+
+    public void stepLeft(){
+        setX(getX() - 50);
+    }
+
+    public void stepRight(){
+        setX(getX() + 50);
+
+    }
+
+
+
 }

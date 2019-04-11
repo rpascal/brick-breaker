@@ -1,0 +1,207 @@
+Index: src/main/java/Brick.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n *    Brick Breaker, Version 1.2\n *    By Ty-Lucas Kelley\n *\n *\t **LICENSE**\n *\n *\t This file is a part of Brick Breaker.\n *\n *\t Brick Breaker is free software: you can redistribute it and/or modify\n *    it under the terms of the GNU General Public License as published by\n *    the Free Software Foundation, either version 3 of the License, or\n *    (at your option) any later version.\n *\n *    Brick Breaker is distributed in the hope that it will be useful,\n *    but WITHOUT ANY WARRANTY; without even the implied warranty of\n *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n *    GNU General Public License for more details.\n *\n *    You should have received a copy of the GNU General Public License\n *    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.\n */\n\n//This \"Brick\" class extends the \"Structure\" class. It is for the bricks used in the game.\n\n//Imports\n\nimport javax.swing.*;\nimport java.awt.*;\nimport java.awt.event.ActionEvent;\nimport java.awt.event.ActionListener;\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Random;\n\n//Class definition\npublic class Brick extends Structure {\n    //Variables\n    private int lives, hits;\n    private boolean destroyed;\n    public Item item;\n    private Color itemColor;\n    private int row;\n    private int col;\n    private Ball ball;\n\n    List<ActionListener> onDestoryEvents = new ArrayList<>();\n\n    //Colors for the bricks\n\n\n    public Brick(int row, int col, Ball ball) {\n        this(\n                (row * Constants.BRICK_WIDTH),\n                ((col * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),\n                Constants.BRICK_WIDTH - 5,\n                Constants.BRICK_HEIGHT - 5,\n                Constants.colors[(new Random()).nextInt(7)][0],\n                1,\n                (new Random()).nextInt(3) + 1);\n\n        this.ball = ball;\n        this.row = row;\n        this.col = col;\n    }\n\n\n    //Constructor\n    public Brick(int x, int y, int width, int height, Color color, int lives, int itemType) {\n        super(x, y, width, height, color);\n        setLives(lives);\n        setHits(0);\n        setDestroyed(false);\n\n        if (itemType == 1) {\n            itemColor = Color.GREEN;\n        }\n        if (itemType == 2) {\n            itemColor = Color.RED;\n        }\n\n        //Places an item of specified type inside the brick to fall when the brick is destroyed\n        item = new Item(x + (width / 4), y + (height / 4), Constants.ITEM_WIDTH, Constants.ITEM_HEIGHT, itemColor, itemType);\n    }\n\n    //Draws a brick\n    @Override\n    public void draw(Graphics g) {\n        if (!destroyed) {\n            g.setColor(color);\n            g.fillRect(x, y, width, height);\n        }\n    }\n\n    //Add a hit to the brick, and destroy the brick when hits == lives\n    public void addHit() {\n        hits++;\n        nextColor();\n        if (hits == lives) {\n            setDestroyed(true);\n        }\n    }\n\n    //Change color to get lighter until the brick is destroyed\n    public void nextColor() {\n        if (color == Constants.colors[0][0] || color == Constants.colors[0][1] || color == Constants.colors[0][2]) {\n            color = Constants.blueColors[hits];\n        }\n        if (color == Constants.colors[1][0] || color == Constants.colors[1][1] || color == Constants.colors[1][2]) {\n            color = Constants.redColors[hits];\n        }\n        if (color == Constants.colors[2][0] || color == Constants.colors[2][1] || color == Constants.colors[2][2]) {\n            color = Constants.purpleColors[hits];\n        }\n        if (color == Constants.colors[3][0] || color == Constants.colors[3][1] || color == Constants.colors[3][2]) {\n            color = Constants.yellowColors[hits];\n        }\n        if (color == Constants.colors[4][0] || color == Constants.colors[4][1] || color == Constants.colors[4][2]) {\n            color = Constants.pinkColors[hits];\n        }\n        if (color == Constants.colors[5][0] || color == Constants.colors[5][1] || color == Constants.colors[5][2]) {\n            color = Constants.grayColors[hits];\n        }\n        if (color == Constants.colors[6][0] || color == Constants.colors[6][1] || color == Constants.colors[6][2]) {\n            color = Constants.greenColors[hits];\n        }\n    }\n\n    public void checkCollisions(){\n        int x1 = ball.getX();\n        int y1 = ball.getY();\n\n        if (hitBottomTop(x1, y1)) {\n            ball.invertY();\n        }\n        if (hitLeftRight(x1, y1)) {\n            ball.invertX();\n        }\n    }\n\n    //Detect if the brick has been hit on its bottom, top, left, or right sides\n    public boolean hitBottomTop(int ballX, int ballY) {\n        if (destroyed) {\n            return false;\n        }\n\n        if (\n                ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y + height)) // Bottom\n                        || ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y)) // top\n        ) {\n            addHit();\n            return true;\n        }\n\n        return false;\n    }\n\n\n    public boolean hitLeftRight(int ballX, int ballY) {\n        if (destroyed) {\n            return false;\n        }\n\n        if (\n                ((ballY >= y) && (ballY <= y + height) && (ballX == x)) // Left\n                        || ((ballY >= y) && (ballY <= y + height) && (ballX == x + width)) // Right\n        ) {\n            addHit();\n            return true;\n        }\n        return false;\n    }\n\n    //Mutator methods\n    public void setLives(int lives) {\n        this.lives = lives;\n    }\n\n    public void setHits(int hits) {\n        this.hits = hits;\n    }\n\n    public void setDestroyed(boolean destroyed) {\n        this.destroyed = destroyed;\n        for (ActionListener onDestroy : onDestoryEvents) {\n            onDestroy.actionPerformed(new ActionEvent(this, 0, \"\"));\n        }\n    }\n\n    //Accessor methods\n    public int getLives() {\n        return lives;\n    }\n\n    public int getHits() {\n        return hits;\n    }\n\n    public boolean isDestroyed() {\n        return destroyed;\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/Brick.java	(revision eea8d63a5c0306d28009198184ab28f1d3cab060)
++++ src/main/java/Brick.java	(date 1555006408000)
+@@ -87,7 +87,7 @@
+     public void draw(Graphics g) {
+         if (!destroyed) {
+             g.setColor(color);
+-            g.fillRect(x, y, width, height);
++            g.fillRect((int)x, (int)y, (int)width, (int)height);
+         }
+     }
+ 
+@@ -126,8 +126,8 @@
+     }
+ 
+     public void checkCollisions(){
+-        int x1 = ball.getX();
+-        int y1 = ball.getY();
++        float x1 = ball.getX();
++        float y1 = ball.getY();
+ 
+         if (hitBottomTop(x1, y1)) {
+             ball.invertY();
+@@ -138,7 +138,7 @@
+     }
+ 
+     //Detect if the brick has been hit on its bottom, top, left, or right sides
+-    public boolean hitBottomTop(int ballX, int ballY) {
++    public boolean hitBottomTop(float ballX, float ballY) {
+         if (destroyed) {
+             return false;
+         }
+@@ -155,7 +155,7 @@
+     }
+ 
+ 
+-    public boolean hitLeftRight(int ballX, int ballY) {
++    public boolean hitLeftRight(float ballX, float ballY) {
+         if (destroyed) {
+             return false;
+         }
+Index: src/main/java/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n*    Brick Breaker, Version 1.2\n*    By Ty-Lucas Kelley\n*\t\n*\t **LICENSE**\n*\n*\t This file is a part of Brick Breaker.\n*\n*\t Brick Breaker is free software: you can redistribute it and/or modify\n*    it under the terms of the GNU General Public License as published by\n*    the Free Software Foundation, either version 3 of the License, or\n*    (at your option) any later version.\n*\n*    Brick Breaker is distributed in the hope that it will be useful,\n*    but WITHOUT ANY WARRANTY; without even the implied warranty of\n*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n*    GNU General Public License for more details.\n*\n*    You should have received a copy of the GNU General Public License\n*    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.\n*/\n\n//This \"Item\" class extends the \"Structure\" class. It is used for the items that fall from some bricks.\n\n//Imports\nimport java.awt.*;\n\n//Class definition\npublic class Item extends Structure {\n\t//Variables\n\tprivate int type;\n\n\t//Constructor\n\tpublic Item(int x, int y, int width, int height, Color color, int type) {\n\t\tsuper(x, y, width, height, color);\n\t\tsetType(type);\n\t}\n\n\t//Draw an item\n\tpublic void draw(Graphics g) {\n\t\tif(type == 3) {\n\t\t\treturn;\n\t\t}\n\t\tg.setColor(color);\n\t\tg.fillRect(x, y, width, height);\n\t}\n\n\t//Drop the item down towards the paddle at slow pace\n\tpublic void tick() {\n\t\ty += 1;\n\t}\n\n\t//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.\n\tpublic void resizePaddle(Paddle p) {\n\t\tif (getType() == 1 && p.getWidth() < Constants.PADDLE_MAX) {\n\t\t\tp.setWidth(p.getWidth() + 15);\n\t\t}\n\t\telse if (getType() == 2 && p.getWidth() > Constants.PADDLE_MIN) {\n\t\t\tp.setWidth(p.getWidth() - 15);\n\t\t}\n\t}\n\n\t//Set the item's type\n\tpublic void setType(int type) {\n\t\tthis.type = type;\n\t}\n\n\t//Get the item's type\n\tpublic int getType() {\n\t\treturn type;\n\t}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/Item.java	(revision eea8d63a5c0306d28009198184ab28f1d3cab060)
++++ src/main/java/Item.java	(date 1555006419000)
+@@ -42,7 +42,7 @@
+ 			return;
+ 		}
+ 		g.setColor(color);
+-		g.fillRect(x, y, width, height);
++		g.fillRect((int)x,(int) y, (int)width, (int)height);
+ 	}
+ 
+ 	//Drop the item down towards the paddle at slow pace
+Index: src/main/java/Paddle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n *    Brick Breaker, Version 1.2\n *    By Ty-Lucas Kelley\n *\n *\t **LICENSE**\n *\n *\t This file is a part of Brick Breaker.\n *\n *\t Brick Breaker is free software: you can redistribute it and/or modify\n *    it under the terms of the GNU General Public License as published by\n *    the Free Software Foundation, either version 3 of the License, or\n *    (at your option) any later version.\n *\n *    Brick Breaker is distributed in the hope that it will be useful,\n *    but WITHOUT ANY WARRANTY; without even the implied warranty of\n *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n *    GNU General Public License for more details.\n *\n *    You should have received a copy of the GNU General Public License\n *    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.\n */\n\n//This \"Paddle\" class extends the \"Structure\" class. It is used for the player's paddle in the game.\n\n//Imports\n\nimport javax.swing.*;\nimport java.awt.*;\nimport java.awt.event.*;\n\n//Class definition\npublic class Paddle extends Structure {\n    //Variables\n    private int xSpeed;\n    private Ball ball;\n    private JPanel parent;\n\n    public Paddle(Ball ball, JPanel parent) {\n        this(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);\n        this.ball = ball;\n        this.parent = parent;\n    }\n\n    //Constructor\n    public Paddle(int x, int y, int width, int height, Color color) {\n        super(x, y, width, height, color);\n    }\n\n    //Draws the paddle\n    @Override\n    public void draw(Graphics g) {\n        g.setColor(color);\n        g.fillRect(x, y, width, height);\n    }\n\n    //Places the paddle back in starting position at center of screen\n    public void reset() {\n        x = Constants.PADDLE_X_START;\n        y = Constants.PADDLE_Y_START;\n    }\n\n    //Checks if the ball hit the paddle\n    public boolean hitPaddle(int ballX, int ballY) {\n        if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {\n            return true;\n        }\n        return false;\n    }\n\n    //Resizes the paddle if it touches an item, then returns true or false\n    public boolean caughtItem(Item i) {\n        if ((i.getX() < x + width) && (i.getX() + i.getWidth() > x) && (y == i.getY() || y == i.getY() - 1)) {\n            i.resizePaddle(this);\n            return true;\n        }\n        return false;\n    }\n\n    public void checkCollisions() {\n        int x1 = ball.getX();\n        int y1 = ball.getY();\n\n        if (hitPaddle(x1, y1)) {\n            ball.setYDir(-1);\n        }\n        if (getX() <= 0) {\n            setX(0);\n        }\n        if (getX() + getWidth() >= parent.getWidth()) {\n            setX(parent.getWidth() - getWidth());\n        }\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/Paddle.java	(revision eea8d63a5c0306d28009198184ab28f1d3cab060)
++++ src/main/java/Paddle.java	(date 1555006378000)
+@@ -50,7 +50,7 @@
+     @Override
+     public void draw(Graphics g) {
+         g.setColor(color);
+-        g.fillRect(x, y, width, height);
++        g.fillRect((int)x, (int)y, (int)width, (int)height);
+     }
+ 
+     //Places the paddle back in starting position at center of screen
+@@ -60,7 +60,7 @@
+     }
+ 
+     //Checks if the ball hit the paddle
+-    public boolean hitPaddle(int ballX, int ballY) {
++    public boolean hitPaddle(float ballX, float ballY) {
+         if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {
+             return true;
+         }
+@@ -77,11 +77,11 @@
+     }
+ 
+     public void checkCollisions() {
+-        int x1 = ball.getX();
+-        int y1 = ball.getY();
++        float x1 = ball.getX();
++        float y1 = ball.getY();
+ 
+         if (hitPaddle(x1, y1)) {
+-            ball.setYDir(-1);
++            ball.invertY();
+         }
+         if (getX() <= 0) {
+             setX(0);
+Index: src/main/java/Structure.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n*    Brick Breaker, Version 1.2\n*    By Ty-Lucas Kelley\n*\t\n*\t **LICENSE**\n*\n*\t This file is a part of Brick Breaker.\n*\n*\t Brick Breaker is free software: you can redistribute it and/or modify\n*    it under the terms of the GNU General Public License as published by\n*    the Free Software Foundation, either version 3 of the License, or\n*    (at your option) any later version.\n*\n*    Brick Breaker is distributed in the hope that it will be useful,\n*    but WITHOUT ANY WARRANTY; without even the implied warranty of\n*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n*    GNU General Public License for more details.\n*\n*    You should have received a copy of the GNU General Public License\n*    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.\n*/\n\n//This \"Structure\" class is the base for all on-screen objects in the game. The Ball, Brick, Item, and Paddle classes extend it.\n\n//Imports\nimport java.awt.*;\n\n//Class definition\npublic class Structure {\n\t//Variables\n\tprotected int x, y, width, height;\n\tprotected Color color;\n\n\tpublic Structure(){\n\n\t}\n\n\t//Constructor\n\tpublic Structure(int x, int y, int width, int height, Color color) {\n\t\tsetX(x);\n\t\tsetY(y);\n\t\tsetWidth(width);\n\t\tsetHeight(height);\n\t\tsetColor(color);\n\t}\n\n\t//Draw a structure\n\tpublic void draw(Graphics g) {\n\t\tg.setColor(color);\n\t\tg.fillRect(x, y, width, height);\n\t}\n\n\t//Mutator methods\n\tpublic void setX(int x) {\n\t\tthis.x = x;\n\t}\n\n\tpublic void setY(int y) {\n\t\tthis.y = y;\n\t}\n\n\tpublic void setWidth(int width) {\n\t\tthis.width = width;\n\t}\n\n\tpublic void setHeight(int height) {\n\t\tthis.height = height;\n\t}\n\n\tpublic void setColor(Color color) {\n\t\tthis.color = color;\n\t}\n\n\t//Accessor methods\n\tpublic int getX() {\n\t\treturn x;\n\t}\n\n\tpublic int getY() {\n\t\treturn y;\n\t}\n\n\tpublic int getWidth() {\n\t\treturn width;\n\t}\n\n\tpublic int getHeight() {\n\t\treturn height;\n\t}\n\n\tpublic Color getColor() {\n\t\treturn color;\n\t}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/Structure.java	(revision eea8d63a5c0306d28009198184ab28f1d3cab060)
++++ src/main/java/Structure.java	(date 1555006241000)
+@@ -28,7 +28,7 @@
+ //Class definition
+ public class Structure {
+ 	//Variables
+-	protected int x, y, width, height;
++	protected float x, y, width, height;
+ 	protected Color color;
+ 
+ 	public Structure(){
+@@ -47,23 +47,23 @@
+ 	//Draw a structure
+ 	public void draw(Graphics g) {
+ 		g.setColor(color);
+-		g.fillRect(x, y, width, height);
++		g.fillRect((int)x, (int)y, (int)width,(int) height);
+ 	}
+ 
+ 	//Mutator methods
+-	public void setX(int x) {
++	public void setX(float x) {
+ 		this.x = x;
+ 	}
+ 
+-	public void setY(int y) {
++	public void setY(float y) {
+ 		this.y = y;
+ 	}
+ 
+-	public void setWidth(int width) {
++	public void setWidth(float width) {
+ 		this.width = width;
+ 	}
+ 
+-	public void setHeight(int height) {
++	public void setHeight(float height) {
+ 		this.height = height;
+ 	}
+ 
+@@ -72,19 +72,19 @@
+ 	}
+ 
+ 	//Accessor methods
+-	public int getX() {
++	public float getX() {
+ 		return x;
+ 	}
+ 
+-	public int getY() {
++	public float getY() {
+ 		return y;
+ 	}
+ 
+-	public int getWidth() {
++	public float getWidth() {
+ 		return width;
+ 	}
+ 
+-	public int getHeight() {
++	public float getHeight() {
+ 		return height;
+ 	}
+ 
+Index: src/main/java/Ball.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n *    Brick Breaker, Version 1.2\n *    By Ty-Lucas Kelley\n *\n *\t **LICENSE**\n *\n *\t This file is a part of Brick Breaker.\n *\n *\t Brick Breaker is free software: you can redistribute it and/or modify\n *    it under the terms of the GNU General Public License as published by\n *    the Free Software Foundation, either version 3 of the License, or\n *    (at your option) any later version.\n *\n *    Brick Breaker is distributed in the hope that it will be useful,\n *    but WITHOUT ANY WARRANTY; without even the implied warranty of\n *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n *    GNU General Public License for more details.\n *\n *    You should have received a copy of the GNU General Public License\n *    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.\n */\n\n//This \"Ball\" class extends the \"Structure\" class. It is for the ball used in the game.\n\n//Imports\n\nimport javax.swing.*;\nimport java.awt.*;\nimport java.util.Random;\n\n//Class definition\npublic class Ball extends Structure {\n    //Variables\n    private boolean onScreen;\n    private float xDir = 1, yDir = -1;\n    private Board parent;\n\n    public Ball(Board parent) {\n        this(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);\n        this.parent = parent;\n    }\n\n    //Constructor\n    public Ball(int x, int y, int width, int height, Color color) {\n        super(x, y, width, height, color);\n        setOnScreen(true);\n        randomizeStart();\n\n    }\n    private void randomizeStart(){\n        int scaledWidth = Constants.WINDOW_WIDTH / 3;\n        int xPosition = getRandomNumberInRange(-scaledWidth, scaledWidth);\n        this.x += xPosition;\n\n        //Random rand = new Random();\n        //yDir = (rand.nextInt() %2 == 0  ? -1 : 1) * rand.nextFloat();\n\n    }\n\n    //Draw the ball\n    @Override\n    public void draw(Graphics g) {\n        g.setColor(color);\n        g.fillOval(x, y, width, height);\n    }\n\n    //Moves the ball\n    public void move() {\n        x += xDir;\n        y += yDir;\n    }\n\n    //Resets the ball to original position at center of screen\n    public void reset() {\n        x = Constants.BALL_X_START;\n        y = Constants.BALL_Y_START;\n        xDir = 1;\n        yDir = -1;\n        randomizeStart();\n    }\n\n    //Mutator methods\n    public void setXDir(int xDir) {\n        this.xDir = xDir;\n    }\n\n    public void invertX() {\n        this.xDir = -this.xDir;\n    }\n\n    public void invertY() {\n        this.yDir = -this.yDir;\n    }\n\n\n    public void setYDir(int yDir) {\n        this.yDir = yDir;\n    }\n\n    public void setOnScreen(boolean onScreen) {\n        this.onScreen = onScreen;\n    }\n\n    //Accessor methods\n    public float getXDir() {\n        return xDir;\n    }\n\n    public float getYDir() {\n        return yDir;\n    }\n\n    public boolean isOnScreen() {\n        return onScreen;\n    }\n\n\n    public void checkCollisions() {\n        if (getX() >= parent.getWidth() - getWidth() || getX() <= 0) {\n            invertX();\n        }\n        if (getY() <= 0 || getY() >= parent.getHeight()) {\n            invertY();\n        }\n\n        if (getY() > Constants.PADDLE_Y_START + 10) {\n            parent.outOfBounds();\n        }\n    }\n\n\n    private int getRandomNumberInRange(int min, int max) {\n\n        if (min >= max) {\n            throw new IllegalArgumentException(\"max must be greater than min\");\n        }\n\n        Random r = new Random();\n        return r.nextInt((max - min) + 1) + min;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/Ball.java	(revision eea8d63a5c0306d28009198184ab28f1d3cab060)
++++ src/main/java/Ball.java	(date 1555006480000)
+@@ -52,8 +52,8 @@
+         int xPosition = getRandomNumberInRange(-scaledWidth, scaledWidth);
+         this.x += xPosition;
+ 
+-        //Random rand = new Random();
+-        //yDir = (rand.nextInt() %2 == 0  ? -1 : 1) * rand.nextFloat();
++        Random rand = new Random();
++        yDir = (rand.nextInt() %2 == 0  ? -1 : 1) * (getRandomNumberInRange(90,100)/100f);
+ 
+     }
+ 
+@@ -61,7 +61,7 @@
+     @Override
+     public void draw(Graphics g) {
+         g.setColor(color);
+-        g.fillOval(x, y, width, height);
++        g.fillOval((int)x, (int)y, (int)width, (int)height);
+     }
+ 
+     //Moves the ball

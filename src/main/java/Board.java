@@ -106,6 +106,8 @@ public class Board extends JPanel implements Runnable {
     public void run() {
         while (true) {
 
+            paddle.tick();
+
 
             collisions();
 
@@ -205,10 +207,10 @@ public class Board extends JPanel implements Runnable {
             int key = ke.getKeyCode();
 
             if (key == KeyEvent.VK_LEFT) {
-                paddle.setX(paddle.getX() - 50);
+                paddle.stepLeft();
             }
             if (key == KeyEvent.VK_RIGHT) {
-                paddle.setX(paddle.getX() + 50);
+                paddle.stepRight();
             }
         }
     }
