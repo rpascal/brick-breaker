@@ -56,7 +56,7 @@ public class Brick extends Structure {
                 Constants.BRICK_HEIGHT - 5,
                 Constants.colors[(new Random()).nextInt(7)][0],
                 1,
-                (new Random()).nextInt(3) + 1);
+                (new Random()).nextInt(2) + 1);
 
         this.ball = ball;
         this.row = row;
@@ -86,8 +86,7 @@ public class Brick extends Structure {
     @Override
     public void draw(Graphics g) {
         if (!destroyed) {
-            g.setColor(color);
-            g.fillRect(x, y, width, height);
+           super.draw(g);
         }
     }
 

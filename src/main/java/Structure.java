@@ -91,4 +91,8 @@ public class Structure {
 	public Color getColor() {
 		return color;
 	}
+
+	public int getXMiddle(){return x + (width/2);}
+	public int getYMiddle(){return y - (height/2);}
+
 }

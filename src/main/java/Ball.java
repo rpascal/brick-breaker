@@ -35,6 +35,9 @@ public class Ball extends Structure {
     private float xDir = 1, yDir = -1;
     private Board parent;
 
+    long startTime;
+
+
     public Ball(Board parent) {
         this(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
         this.parent = parent;
@@ -45,15 +48,29 @@ public class Ball extends Structure {
         super(x, y, width, height, color);
         setOnScreen(true);
         randomizeStart();
-
+        startTime = System.currentTimeMillis();
     }
-    private void randomizeStart(){
+
+    private void randomizeStart() {
         int scaledWidth = Constants.WINDOW_WIDTH / 3;
         int xPosition = getRandomNumberInRange(-scaledWidth, scaledWidth);
         this.x += xPosition;
 
         //Random rand = new Random();
         //yDir = (rand.nextInt() %2 == 0  ? -1 : 1) * rand.nextFloat();
+
+    }
+
+    public void tick() {
+        move();
+        checkCollisions();
+
+        long currentTime = System.currentTimeMillis();
+
+//        if (currentTime - startTime > 5000) {
+//            increaseSpeed();
+//            startTime = System.currentTimeMillis();
+//        }
 
     }
 
@@ -130,13 +147,22 @@ public class Ball extends Structure {
 
 
     private int getRandomNumberInRange(int min, int max) {
-
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
         }
-
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
+    }
+
+    public void increaseSpeed() {
+        System.out.println("Increase speed");
+
+        if (Math.abs(xDir) < 5) {
+            xDir += (xDir < 0 ? -1 : 1) * 1;
+        }
+        if (Math.abs(yDir) < 5) {
+            yDir += (yDir < 0 ? -1 : 1) * 1;
+        }
     }
 
 }

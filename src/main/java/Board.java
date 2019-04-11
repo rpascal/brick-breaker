@@ -37,10 +37,10 @@ public class Board extends JPanel implements Runnable {
     private Paddle paddle;
     private Ball ball;
 
-    private java.util.List<Brick> bricks = new ArrayList<Brick>();
+    private java.util.List<Brick> bricks = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
 
-    private int score = 0, lives = Constants.MAX_LIVES, bricksLeft = Constants.MAX_BRICKS, waitTime = 3;
+    private int score = 0, lives = Constants.MAX_LIVES, bricksLeft = 0, waitTime = 3;
 
     private Thread game;
 
@@ -62,7 +62,6 @@ public class Board extends JPanel implements Runnable {
 
         onClearBricksListners.add(e -> {
             ball.reset();
-            bricksLeft = Constants.MAX_BRICKS;
             makeBricks();
             lives++;
             score += 100;
@@ -84,9 +83,12 @@ public class Board extends JPanel implements Runnable {
 
     //fills the array of bricks
     public void makeBricks() {
-        bricks = new ArrayList<>();
+        bricksLeft = 0;
 
-        for (int i = 0; i < 10; i++) {
+        bricks = new ArrayList<>();
+        int horizontalBricks = Constants.WINDOW_WIDTH / Constants.BRICK_WIDTH;
+
+        for (int i = 0; i < horizontalBricks; i++) {
             for (int j = 0; j < 5; j++) {
                 Brick brick = new Brick(i, j, ball);
 
@@ -95,7 +97,7 @@ public class Board extends JPanel implements Runnable {
                     score += 50;
                     addItem(brick.item);
                 });
-
+                bricksLeft++;
                 bricks.add(brick);
             }
         }
@@ -106,12 +108,13 @@ public class Board extends JPanel implements Runnable {
     public void run() {
         while (true) {
 
+
             paddle.tick();
+            ball.tick();
 
-
-            collisions();
-
-            ball.move();
+            for (Brick brick : bricks) {
+                brick.checkCollisions();
+            }
 
             for (Item item : items) {
                 item.tick();
@@ -130,13 +133,6 @@ public class Board extends JPanel implements Runnable {
         }
     }
 
-    private void collisions() {
-        paddle.checkCollisions();
-        for (Brick brick : bricks) {
-            brick.checkCollisions();
-        }
-        ball.checkCollisions();
-    }
 
     public void addItem(Item i) {
         items.add(i);
@@ -153,7 +149,7 @@ public class Board extends JPanel implements Runnable {
     }
 
     public void checkLives() {
-        if (bricksLeft == Constants.NO_BRICKS) {
+        if (bricksLeft == 0) {
             for (ActionListener onClearBricks : onClearBricksListners) {
                 onClearBricks.actionPerformed(new ActionEvent(this, 0, "bricks cleared"));
             }
@@ -196,7 +192,6 @@ public class Board extends JPanel implements Runnable {
         paddle.setWidth(getWidth() / 7);
         lives = Constants.MAX_LIVES;
         score = 0;
-        bricksLeft = Constants.MAX_BRICKS;
         makeBricks();
     }
 

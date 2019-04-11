@@ -36,15 +36,6 @@ public class Item extends Structure {
 		setType(type);
 	}
 
-	//Draw an item
-	public void draw(Graphics g) {
-		if(type == 3) {
-			return;
-		}
-		g.setColor(color);
-		g.fillRect(x, y, width, height);
-	}
-
 	//Drop the item down towards the paddle at slow pace
 	public void tick() {
 		y += 1;

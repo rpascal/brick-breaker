@@ -35,6 +35,7 @@ public class Paddle extends Structure {
     private Ball ball;
     private JPanel parent;
     private PaddleController pc;
+    private  int  stepRate = 1;
 
     public Paddle(Ball ball, JPanel parent) {
         this(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
@@ -47,14 +48,6 @@ public class Paddle extends Structure {
     public Paddle(int x, int y, int width, int height, Color color)
     {
         super(x, y, width, height, color);
-
-    }
-
-    //Draws the paddle
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
     }
 
     //Places the paddle back in starting position at center of screen
@@ -85,7 +78,7 @@ public class Paddle extends Structure {
         int y1 = ball.getY();
 
         if (hitPaddle(x1, y1)) {
-            ball.setYDir(-1);
+            ball.invertY();
         }
         if (getX() <= 0) {
             setX(0);
@@ -98,14 +91,16 @@ public class Paddle extends Structure {
     public void tick()
     {
         pc.MoveTowardBall();
+        checkCollisions();
+
     }
 
     public void stepLeft(){
-        setX(getX() - 2);
+        setX(getX() - stepRate);
     }
 
     public void stepRight(){
-        setX(getX() + 2);
+        setX(getX() + stepRate);
 
     }
 }

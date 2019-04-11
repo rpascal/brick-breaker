@@ -1,7 +1,5 @@
 public class PaddleController {
 
-
-
     private Ball ball;
     private Paddle paddle;
 
@@ -13,31 +11,25 @@ public class PaddleController {
 
     public void MoveTowardBall()
     {
-        int ball_x = ball.getX();
-        int ball_y = ball.getY();
+        int ballXMiddle = ball.getXMiddle();
+        int ballYMiddle = ball.getYMiddle();
 
-        int paddle_x = paddle.getX();
-        int paddle_y = paddle.getY();
+        int paddleXMiddle = paddle.getXMiddle();
+        int paddleYMiddle = paddle.getYMiddle();
 
-        if (ball_x < paddle_x)
+        if (ballXMiddle < paddleXMiddle)
         {
-            System.out.println("step left");
             paddle.stepLeft();
         }
-
-        else if (ball_x > paddle_x)
+        else if (ballXMiddle > paddleXMiddle)
         {
-            System.out.println("step right");
             paddle.stepRight();
         }
 
-        else if (ball_x == paddle_x)
+        else if (ballXMiddle == paddleXMiddle)
         {
 
         }
-
-
-
 
     }
 
