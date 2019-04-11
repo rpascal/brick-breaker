@@ -34,16 +34,20 @@ public class Paddle extends Structure {
     private int xSpeed;
     private Ball ball;
     private JPanel parent;
+    private PaddleController pc;
 
     public Paddle(Ball ball, JPanel parent) {
         this(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
         this.ball = ball;
         this.parent = parent;
+        pc = new PaddleController(this.ball, this);
     }
 
     //Constructor
-    public Paddle(int x, int y, int width, int height, Color color) {
+    public Paddle(int x, int y, int width, int height, Color color)
+    {
         super(x, y, width, height, color);
+
     }
 
     //Draws the paddle
@@ -91,19 +95,17 @@ public class Paddle extends Structure {
         }
     }
 
-    public void tick(){
-
+    public void tick()
+    {
+        pc.MoveTowardBall();
     }
 
     public void stepLeft(){
-        setX(getX() - 50);
+        setX(getX() - 2);
     }
 
     public void stepRight(){
-        setX(getX() + 50);
+        setX(getX() + 2);
 
     }
-
-
-
 }
