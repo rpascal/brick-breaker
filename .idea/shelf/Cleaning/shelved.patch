@@ -1,0 +1,281 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"ae4d26d5-79d8-49fe-8efb-381799d463a3\" name=\"Default Changelist\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Ball.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Ball.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Board.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Board.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Brick.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Brick.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Constants.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Constants.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Item.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Item.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Paddle.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Paddle.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Structure.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Structure.java\" afterDir=\"false\" />\n    </list>\n    <ignored path=\"$PROJECT_DIR$/out/\" />\n    <ignored path=\"$PROJECT_DIR$/target/\" />\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileEditorManager\">\n    <leaf>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Ball.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"465\">\n              <caret line=\"55\" column=\"22\" selection-start-line=\"55\" selection-start-column=\"22\" selection-end-line=\"55\" selection-end-column=\"22\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Paddle.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"315\">\n              <caret line=\"48\" column=\"22\" selection-start-line=\"48\" selection-start-column=\"22\" selection-end-line=\"48\" selection-end-column=\"22\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Main.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"210\">\n              <caret line=\"39\" column=\"13\" lean-forward=\"true\" selection-start-line=\"39\" selection-start-column=\"13\" selection-end-line=\"39\" selection-end-column=\"13\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"true\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Board.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"264\">\n              <caret line=\"90\" column=\"8\" selection-start-line=\"90\" selection-start-column=\"8\" selection-end-line=\"90\" selection-end-column=\"8\" />\n              <folding>\n                <element signature=\"e#2526#2527#0\" expanded=\"true\" />\n                <element signature=\"e#2547#2548#0\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Item.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"465\">\n              <caret line=\"57\" column=\"60\" selection-start-line=\"57\" selection-start-column=\"60\" selection-end-line=\"57\" selection-end-column=\"60\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Brick.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"510\">\n              <caret line=\"107\" column=\"101\" selection-start-line=\"107\" selection-start-column=\"101\" selection-end-line=\"107\" selection-end-column=\"101\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Constants.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"617\">\n              <caret line=\"97\" column=\"10\" selection-start-line=\"97\" selection-start-column=\"10\" selection-end-line=\"97\" selection-end-column=\"10\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Structure.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"150\">\n              <caret line=\"34\" selection-start-line=\"34\" selection-end-line=\"34\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n    </leaf>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <option name=\"CHANGED_PATHS\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Ball.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Paddle.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Main.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Item.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Structure.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Constants.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Brick.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Board.java\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"importingSettings\">\n      <MavenImportingSettings>\n        <option name=\"importAutomatically\" value=\"true\" />\n      </MavenImportingSettings>\n    </option>\n  </component>\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\n    <option name=\"x\" value=\"280\" />\n    <option name=\"y\" value=\"20\" />\n    <option name=\"width\" value=\"1400\" />\n    <option name=\"height\" value=\"910\" />\n  </component>\n  <component name=\"ProjectView\">\n    <navigator proportions=\"\" version=\"1\">\n      <foldersAlwaysOnTop value=\"true\" />\n    </navigator>\n    <panes>\n      <pane id=\"Scope\" />\n      <pane id=\"PackagesPane\" />\n      <pane id=\"ProjectPane\">\n        <subPane>\n          <expand>\n            <path>\n              <item name=\"brick-breaker\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"brick-breaker\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"brick-breaker\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"brick-breaker\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"brick-breaker\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"brick-breaker\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"main\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"brick-breaker\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"brick-breaker\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"main\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"java\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n          </expand>\n          <select />\n        </subPane>\n      </pane>\n    </panes>\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\n    <property name=\"com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp\" value=\"1551737781673\" />\n    <property name=\"nodejs_interpreter_path.stuck_in_default_project\" value=\"undefined stuck path\" />\n    <property name=\"nodejs_npm_path_reset_for_default_project\" value=\"true\" />\n  </component>\n  <component name=\"RunDashboard\">\n    <option name=\"ruleStates\">\n      <list>\n        <RuleState>\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\n        </RuleState>\n        <RuleState>\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\n        </RuleState>\n      </list>\n    </option>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\n      <module name=\"brick-breaker\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"ae4d26d5-79d8-49fe-8efb-381799d463a3\" name=\"Default Changelist\" comment=\"\" />\n      <created>1551726644132</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1551726644132</updated>\n      <workItem from=\"1551726645766\" duration=\"1768000\" />\n      <workItem from=\"1551735746119\" duration=\"2008000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TimeTrackingManager\">\n    <option name=\"totallyTimeSpent\" value=\"3776000\" />\n  </component>\n  <component name=\"ToolWindowManager\">\n    <frame x=\"40\" y=\"0\" width=\"1881\" height=\"951\" extended-state=\"6\" />\n    <editor active=\"true\" />\n    <layout>\n      <window_info id=\"Designer\" order=\"0\" />\n      <window_info id=\"UI Designer\" order=\"1\" />\n      <window_info id=\"Capture Tool\" order=\"2\" />\n      <window_info id=\"Favorites\" order=\"3\" side_tool=\"true\" />\n      <window_info id=\"Image Layers\" order=\"4\" />\n      <window_info content_ui=\"combo\" id=\"Project\" order=\"5\" visible=\"true\" weight=\"0.25259137\" />\n      <window_info id=\"Structure\" order=\"6\" side_tool=\"true\" weight=\"0.25\" />\n      <window_info anchor=\"bottom\" id=\"Docker\" order=\"0\" show_stripe_button=\"false\" />\n      <window_info anchor=\"bottom\" id=\"Version Control\" order=\"1\" />\n      <window_info anchor=\"bottom\" id=\"Terminal\" order=\"2\" />\n      <window_info anchor=\"bottom\" id=\"Database Changes\" order=\"3\" />\n      <window_info anchor=\"bottom\" id=\"Event Log\" order=\"4\" side_tool=\"true\" />\n      <window_info anchor=\"bottom\" id=\"Message\" order=\"5\" />\n      <window_info anchor=\"bottom\" id=\"Find\" order=\"6\" />\n      <window_info active=\"true\" anchor=\"bottom\" id=\"Run\" order=\"7\" visible=\"true\" weight=\"0.23614457\" />\n      <window_info anchor=\"bottom\" id=\"Debug\" order=\"8\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"Cvs\" order=\"9\" weight=\"0.25\" />\n      <window_info anchor=\"bottom\" id=\"Messages\" order=\"10\" weight=\"0.32891566\" />\n      <window_info anchor=\"bottom\" id=\"Inspection\" order=\"11\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"TODO\" order=\"12\" />\n      <window_info anchor=\"right\" id=\"Theme Preview\" order=\"0\" />\n      <window_info anchor=\"right\" id=\"Database\" order=\"1\" />\n      <window_info anchor=\"right\" id=\"Capture Analysis\" order=\"2\" />\n      <window_info anchor=\"right\" id=\"Palette&#9;\" order=\"3\" />\n      <window_info anchor=\"right\" id=\"Maven\" order=\"4\" />\n      <window_info anchor=\"right\" id=\"Palette\" order=\"5\" />\n      <window_info anchor=\"right\" id=\"Commander\" internal_type=\"SLIDING\" order=\"6\" type=\"SLIDING\" weight=\"0.4\" />\n      <window_info anchor=\"right\" id=\"Ant Build\" order=\"7\" weight=\"0.25\" />\n      <window_info anchor=\"right\" content_ui=\"combo\" id=\"Hierarchy\" order=\"8\" weight=\"0.25\" />\n    </layout>\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"1\" />\n  </component>\n  <component name=\"editorHistoryManager\">\n    <entry file=\"file://$PROJECT_DIR$/dist/img/screenshot.png\" />\n    <entry file=\"file://$PROJECT_DIR$/dist/img/Icon.png\" />\n    <entry file=\"file://$PROJECT_DIR$/pom.xml\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"165\">\n          <caret line=\"11\" column=\"10\" selection-start-line=\"11\" selection-start-column=\"10\" selection-end-line=\"11\" selection-end-column=\"10\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Ball.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"465\">\n          <caret line=\"55\" column=\"22\" selection-start-line=\"55\" selection-start-column=\"22\" selection-end-line=\"55\" selection-end-column=\"22\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Paddle.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"315\">\n          <caret line=\"48\" column=\"22\" selection-start-line=\"48\" selection-start-column=\"22\" selection-end-line=\"48\" selection-end-column=\"22\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Item.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"465\">\n          <caret line=\"57\" column=\"60\" selection-start-line=\"57\" selection-start-column=\"60\" selection-end-line=\"57\" selection-end-column=\"60\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Structure.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"150\">\n          <caret line=\"34\" selection-start-line=\"34\" selection-end-line=\"34\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Constants.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"617\">\n          <caret line=\"97\" column=\"10\" selection-start-line=\"97\" selection-start-column=\"10\" selection-end-line=\"97\" selection-end-column=\"10\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Brick.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"510\">\n          <caret line=\"107\" column=\"101\" selection-start-line=\"107\" selection-start-column=\"101\" selection-end-line=\"107\" selection-end-column=\"101\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Main.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"210\">\n          <caret line=\"39\" column=\"13\" lean-forward=\"true\" selection-start-line=\"39\" selection-start-column=\"13\" selection-end-line=\"39\" selection-end-column=\"13\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Board.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"264\">\n          <caret line=\"90\" column=\"8\" selection-start-line=\"90\" selection-start-column=\"8\" selection-end-line=\"90\" selection-end-column=\"8\" />\n          <folding>\n            <element signature=\"e#2526#2527#0\" expanded=\"true\" />\n            <element signature=\"e#2547#2548#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n  </component>\n  <component name=\"masterDetails\">\n    <states>\n      <state key=\"ProjectJDKs.UI\">\n        <settings>\n          <last-edited>1.8</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n    </states>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 17f96647761b496730264bc657084905b7b45edc)
++++ .idea/workspace.xml	(date 1554998882000)
+@@ -3,14 +3,15 @@
+   <component name="ChangeListManager">
+     <list default="true" id="ae4d26d5-79d8-49fe-8efb-381799d463a3" name="Default Changelist" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ball.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Brick.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constants.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Item.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Paddle.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Structure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Structure.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ball.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Board$BoardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Board$BoardListener.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Board.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Brick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Brick.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Constants.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Item.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Paddle.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Structure.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Structure.class" afterDir="false" />
+     </list>
+     <ignored path="$PROJECT_DIR$/out/" />
+     <ignored path="$PROJECT_DIR$/target/" />
+@@ -21,30 +22,12 @@
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+   <component name="FileEditorManager">
+-    <leaf>
++    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+       <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Ball.java">
++        <entry file="file://$PROJECT_DIR$/src/main/java/Brick.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="465">
+-              <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Paddle.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="315">
+-              <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="210">
+-              <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
++            <state relative-caret-position="690">
++              <caret line="71" column="16" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+             </state>
+           </provider>
+         </entry>
+@@ -52,8 +35,8 @@
+       <file pinned="false" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/src/main/java/Board.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="264">
+-              <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
++            <state relative-caret-position="150">
++              <caret line="229" column="24" selection-start-line="229" selection-start-column="24" selection-end-line="229" selection-end-column="24" />
+               <folding>
+                 <element signature="e#2526#2527#0" expanded="true" />
+                 <element signature="e#2547#2548#0" expanded="true" />
+@@ -62,42 +45,6 @@
+           </provider>
+         </entry>
+       </file>
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Item.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="465">
+-              <caret line="57" column="60" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Brick.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="510">
+-              <caret line="107" column="101" selection-start-line="107" selection-start-column="101" selection-end-line="107" selection-end-column="101" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Constants.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="617">
+-              <caret line="97" column="10" selection-start-line="97" selection-start-column="10" selection-end-line="97" selection-end-column="10" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/main/java/Structure.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="150">
+-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+     </leaf>
+   </component>
+   <component name="Git.Settings">
+@@ -136,8 +83,6 @@
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
+-      <pane id="Scope" />
+-      <pane id="PackagesPane" />
+       <pane id="ProjectPane">
+         <subPane>
+           <expand>
+@@ -167,12 +112,15 @@
+           <select />
+         </subPane>
+       </pane>
++      <pane id="Scope" />
++      <pane id="PackagesPane" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="aspect.path.notification.shown" value="true" />
+-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551737781673" />
++    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551738561791" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+   </component>
+@@ -213,32 +161,41 @@
+       <option name="presentableId" value="Default" />
+       <updated>1551726644132</updated>
+       <workItem from="1551726645766" duration="1768000" />
+-      <workItem from="1551735746119" duration="2008000" />
++      <workItem from="1551735746119" duration="2875000" />
++      <workItem from="1552577402629" duration="81000" />
++      <workItem from="1552577659273" duration="78000" />
+     </task>
++    <task id="LOCAL-00001" summary="Cleaning">
++      <created>1551737816414</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1551737816414</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TimeTrackingManager">
+-    <option name="totallyTimeSpent" value="3776000" />
++    <option name="totallyTimeSpent" value="4802000" />
+   </component>
+   <component name="ToolWindowManager">
+     <frame x="40" y="0" width="1881" height="951" extended-state="6" />
+-    <editor active="true" />
+     <layout>
+       <window_info id="Designer" order="0" />
+       <window_info id="UI Designer" order="1" />
+       <window_info id="Capture Tool" order="2" />
+       <window_info id="Favorites" order="3" side_tool="true" />
+       <window_info id="Image Layers" order="4" />
+-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25259137" />
++      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25804693" />
+       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+-      <window_info anchor="bottom" id="Version Control" order="1" />
+-      <window_info anchor="bottom" id="Terminal" order="2" />
++      <window_info anchor="bottom" id="Version Control" order="1" weight="0.32891566" />
++      <window_info active="true" anchor="bottom" id="Terminal" order="2" visible="true" weight="0.23734939" />
+       <window_info anchor="bottom" id="Database Changes" order="3" />
+       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
+       <window_info anchor="bottom" id="Message" order="5" />
+       <window_info anchor="bottom" id="Find" order="6" />
+-      <window_info active="true" anchor="bottom" id="Run" order="7" visible="true" weight="0.23614457" />
++      <window_info anchor="bottom" id="Run" order="7" weight="0.23614457" />
+       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
+       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+       <window_info anchor="bottom" id="Messages" order="10" weight="0.32891566" />
+@@ -258,6 +215,50 @@
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="1" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State>
++              <option name="RECENTLY_FILTERED_USER_GROUPS">
++                <collection />
++              </option>
++              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
++                <collection />
++              </option>
++              <option name="COLUMN_ORDER">
++                <list>
++                  <option value="0" />
++                  <option value="1" />
++                  <option value="2" />
++                  <option value="3" />
++                </list>
++              </option>
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
++    <option name="RECENT_FILTERS">
++      <map>
++        <entry key="Branch">
++          <value>
++            <list />
++          </value>
++        </entry>
++        <entry key="User">
++          <value>
++            <list />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Cleaning" />
++    <option name="LAST_COMMIT_MESSAGE" value="Cleaning" />
++  </component>
+   <component name="editorHistoryManager">
+     <entry file="file://$PROJECT_DIR$/dist/img/screenshot.png" />
+     <entry file="file://$PROJECT_DIR$/dist/img/Icon.png" />
+@@ -303,24 +304,24 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/main/java/Brick.java">
++    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="510">
+-          <caret line="107" column="101" selection-start-line="107" selection-start-column="101" selection-end-line="107" selection-end-column="101" />
++        <state relative-caret-position="210">
++          <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
++    <entry file="file://$PROJECT_DIR$/src/main/java/Brick.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="210">
+-          <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
++        <state relative-caret-position="690">
++          <caret line="71" column="16" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+         </state>
+       </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/src/main/java/Board.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="264">
+-          <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
++        <state relative-caret-position="150">
++          <caret line="229" column="24" selection-start-line="229" selection-start-column="24" selection-end-line="229" selection-end-column="24" />
+           <folding>
+             <element signature="e#2526#2527#0" expanded="true" />
+             <element signature="e#2547#2548#0" expanded="true" />

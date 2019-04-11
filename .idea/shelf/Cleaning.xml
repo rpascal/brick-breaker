@@ -1,0 +1,49 @@
+<changelist name="Cleaning" date="1554998975810" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/shelved.patch" />
+  <option name="DESCRIPTION" value="Cleaning" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Ball.class" />
+    <option name="AFTER_PATH" value="target/classes/Ball.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Ball.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Board$BoardListener.class" />
+    <option name="AFTER_PATH" value="target/classes/Board$BoardListener.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Board$BoardListener.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Board.class" />
+    <option name="AFTER_PATH" value="target/classes/Board.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Board.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Brick.class" />
+    <option name="AFTER_PATH" value="target/classes/Brick.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Brick.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Constants.class" />
+    <option name="AFTER_PATH" value="target/classes/Constants.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Constants.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Item.class" />
+    <option name="AFTER_PATH" value="target/classes/Item.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Item.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main.class" />
+    <option name="AFTER_PATH" value="target/classes/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Paddle.class" />
+    <option name="AFTER_PATH" value="target/classes/Paddle.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Paddle.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Structure.class" />
+    <option name="AFTER_PATH" value="target/classes/Structure.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Cleaning/Structure.class" />
+  </binary>
+</changelist>
