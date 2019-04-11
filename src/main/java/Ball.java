@@ -26,12 +26,13 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 //Class definition
 public class Ball extends Structure {
     //Variables
     private boolean onScreen;
-    private int xDir = 1, yDir = -1;
+    private float xDir = 1, yDir = -1;
     private Board parent;
 
     public Ball(Board parent) {
@@ -43,6 +44,17 @@ public class Ball extends Structure {
     public Ball(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
         setOnScreen(true);
+        randomizeStart();
+
+    }
+    private void randomizeStart(){
+        int scaledWidth = Constants.WINDOW_WIDTH / 3;
+        int xPosition = getRandomNumberInRange(-scaledWidth, scaledWidth);
+        this.x += xPosition;
+
+        //Random rand = new Random();
+        //yDir = (rand.nextInt() %2 == 0  ? -1 : 1) * rand.nextFloat();
+
     }
 
     //Draw the ball
@@ -64,6 +76,7 @@ public class Ball extends Structure {
         y = Constants.BALL_Y_START;
         xDir = 1;
         yDir = -1;
+        randomizeStart();
     }
 
     //Mutator methods
@@ -89,11 +102,11 @@ public class Ball extends Structure {
     }
 
     //Accessor methods
-    public int getXDir() {
+    public float getXDir() {
         return xDir;
     }
 
-    public int getYDir() {
+    public float getYDir() {
         return yDir;
     }
 
@@ -115,5 +128,15 @@ public class Ball extends Structure {
         }
     }
 
+
+    private int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
 
 }
