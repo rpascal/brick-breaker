@@ -37,11 +37,11 @@ public class Paddle extends Structure {
     private PaddleController pc;
     private  int  stepRate = 1;
 
-    public Paddle(Ball ball, JPanel parent) {
+    public Paddle(Ball ball, Board parent) {
         this(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
         this.ball = ball;
         this.parent = parent;
-        pc = new PaddleController(this.ball, this);
+        pc = new PaddleController(this.ball, this, parent);
     }
 
     //Constructor

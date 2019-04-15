@@ -30,6 +30,8 @@ import java.lang.Thread;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 
 //Class definition
 public class Board extends JPanel implements Runnable {
@@ -48,12 +50,24 @@ public class Board extends JPanel implements Runnable {
     List<ActionListener> onOutOfBoundsListners = new ArrayList<>();
     List<ActionListener> onLoseListners = new ArrayList<>();
 
+    JTextArea outputText;
+    List<String> logMessages = new ArrayList<>();
 
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
         addKeyListener(new BoardListener());
         setFocusable(true);
+
+
+        outputText = new JTextArea(35  ,40);
+        outputText.setBackground(new Color(0,0,0,0));
+
+        setLayout(new BorderLayout());
+        add( outputText, BorderLayout.PAGE_END );
+
+
+
         ball = new Ball(this);
 
         makeBricks();
@@ -79,6 +93,11 @@ public class Board extends JPanel implements Runnable {
 
         game = new Thread(this);
         game.start();
+
+
+
+
+
     }
 
     //fills the array of bricks
@@ -108,7 +127,6 @@ public class Board extends JPanel implements Runnable {
     public void run() {
         while (true) {
 
-
             paddle.tick();
             ball.tick();
 
@@ -125,11 +143,23 @@ public class Board extends JPanel implements Runnable {
 
 
             repaint();
+
+            outputText.setText("");
+            List<String> tail = logMessages.subList(Math.max(logMessages.size() - 30, 0), logMessages.size());
+
+
+            for(String log : tail){
+                outputText.append( log );
+            }
+
             try {
                 game.sleep(waitTime);
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
+
+
+
         }
     }
 
@@ -180,8 +210,11 @@ public class Board extends JPanel implements Runnable {
         }
         g.setColor(Color.BLACK);
 
-        g.drawString("Lives: " + lives, 10, getHeight() - (getHeight() / 10));
-        g.drawString("Score: " + score, 10, getHeight() - (2 * (getHeight() / 10)) + 25);
+        g.drawString("Lives: " + lives, Constants.WINDOW_WIDTH - 140, getHeight() - (getHeight() / 10));
+        g.drawString("Score: " + score, Constants.WINDOW_WIDTH - 140, getHeight() - (2 * (getHeight() / 10)) + 25);
+
+
+
 
         for (Item i : items) {
             i.draw(g);
@@ -197,6 +230,9 @@ public class Board extends JPanel implements Runnable {
 
 
     private class BoardListener extends KeyAdapter {
+
+        boolean paused = false;
+
         @Override
         public void keyPressed(KeyEvent ke) {
             int key = ke.getKeyCode();
@@ -206,6 +242,14 @@ public class Board extends JPanel implements Runnable {
             }
             if (key == KeyEvent.VK_RIGHT) {
                 paddle.stepRight();
+            }
+            if (key == KeyEvent.VK_SPACE) {
+                if(!paused){
+                    game.suspend();
+                }else{
+                    game.resume();
+                }
+                paused = !paused;
             }
         }
     }
