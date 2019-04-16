@@ -35,7 +35,7 @@ public class Paddle extends Structure {
     private Ball ball;
     private JPanel parent;
     private PaddleController pc;
-    private  int  stepRate = 1;
+    private int stepRate = 1;
 
     public Paddle(Ball ball, Board parent) {
         this(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
@@ -45,8 +45,7 @@ public class Paddle extends Structure {
     }
 
     //Constructor
-    public Paddle(int x, int y, int width, int height, Color color)
-    {
+    public Paddle(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
     }
 
@@ -88,19 +87,25 @@ public class Paddle extends Structure {
         }
     }
 
-    public void tick()
-    {
+    public void tick() {
         pc.MoveTowardBall();
         checkCollisions();
 
     }
 
-    public void stepLeft(){
-        setX(getX() - stepRate);
+    public void stepLeft() {
+        stepLeft(1);
     }
 
-    public void stepRight(){
-        setX(getX() + stepRate);
+    public void stepRight() {
+        stepRight(1);
+    }
 
+    public void stepLeft(int acceleration) {
+        setX(getX() - stepRate * acceleration);
+    }
+
+    public void stepRight(int acceleration) {
+        setX(getX() + stepRate * acceleration);
     }
 }

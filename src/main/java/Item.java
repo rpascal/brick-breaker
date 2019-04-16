@@ -60,4 +60,8 @@ public class Item extends Structure {
 	public int getType() {
 		return type;
 	}
+
+	public boolean isGood(){
+		return getType() == 1;
+	}
 }

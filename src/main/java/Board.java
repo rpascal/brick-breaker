@@ -40,7 +40,7 @@ public class Board extends JPanel implements Runnable {
     private Ball ball;
 
     private java.util.List<Brick> bricks = new ArrayList<>();
-    private ArrayList<Item> items = new ArrayList<>();
+    ArrayList<Item> items = new ArrayList<>();
 
     private int score = 0, lives = Constants.MAX_LIVES, bricksLeft = 0, waitTime = 3;
 
