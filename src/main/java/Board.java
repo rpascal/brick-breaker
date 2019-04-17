@@ -144,13 +144,13 @@ public class Board extends JPanel implements Runnable {
 
             repaint();
 
-            outputText.setText("");
-            List<String> tail = logMessages.subList(Math.max(logMessages.size() - 30, 0), logMessages.size());
-
-
-            for(String log : tail){
-                outputText.append( log );
-            }
+//            outputText.setText("");
+//            List<String> tail = logMessages.subList(Math.max(logMessages.size() - 30, 0), logMessages.size());
+//
+//
+//            for(String log : tail){
+//                outputText.append( log );
+//            }
 
             try {
                 game.sleep(waitTime);
