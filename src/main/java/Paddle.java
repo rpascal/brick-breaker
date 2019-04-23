@@ -25,23 +25,23 @@
 //Imports
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.util.List;
 
 //Class definition
 public class Paddle extends Structure {
     //Variables
     private int xSpeed;
-    private Ball ball;
-    private JPanel parent;
+    private List<Ball> balls;
+    private Board parent;
     private PaddleController pc;
     private int stepRate = 1;
 
-    public Paddle(Ball ball, Board parent) {
+    public Paddle(List<Ball> balls, Board parent) {
         this(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);
-        this.ball = ball;
+        this.balls = balls;
         this.parent = parent;
-        pc = new PaddleController(this.ball, this, parent);
+        pc = new PaddleController(this.balls, this, parent);
     }
 
     //Constructor
@@ -67,23 +67,28 @@ public class Paddle extends Structure {
     public boolean caughtItem(Item i) {
         if ((i.getX() < x + width) && (i.getX() + i.getWidth() > x) && (y == i.getY() || y == i.getY() - 1)) {
             i.resizePaddle(this);
+            if(i.split()){
+                parent.splitBall();
+            }
             return true;
         }
         return false;
     }
 
     public void checkCollisions() {
-        int x1 = ball.getX();
-        int y1 = ball.getY();
+        for(Ball ball : balls){
+            int x1 = ball.getX();
+            int y1 = ball.getY();
 
-        if (hitPaddle(x1, y1)) {
-            ball.invertY();
-        }
-        if (getX() <= 0) {
-            setX(0);
-        }
-        if (getX() + getWidth() >= parent.getWidth()) {
-            setX(parent.getWidth() - getWidth());
+            if (hitPaddle(x1, y1)) {
+                ball.invertY();
+            }
+            if (getX() <= 0) {
+                setX(0);
+            }
+            if (getX() + getWidth() >= parent.getWidth()) {
+                setX(parent.getWidth() - getWidth());
+            }
         }
     }
 

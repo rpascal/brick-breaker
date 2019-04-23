@@ -30,14 +30,13 @@ import java.lang.Thread;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 //Class definition
 public class Board extends JPanel implements Runnable {
     //Items on-screen
     private Paddle paddle;
-    private Ball ball;
+    private List<Ball> balls;
 
     private java.util.List<Brick> bricks = new ArrayList<>();
     ArrayList<Item> items = new ArrayList<>();
@@ -47,7 +46,7 @@ public class Board extends JPanel implements Runnable {
     private Thread game;
 
     List<ActionListener> onClearBricksListners = new ArrayList<>();
-    List<ActionListener> onOutOfBoundsListners = new ArrayList<>();
+    List<ActionListener> onOutOfBallsListners = new ArrayList<>();
     List<ActionListener> onLoseListners = new ArrayList<>();
 
     JTextArea outputText;
@@ -60,22 +59,22 @@ public class Board extends JPanel implements Runnable {
         setFocusable(true);
 
 
-        outputText = new JTextArea(35  ,40);
-        outputText.setBackground(new Color(0,0,0,0));
+        outputText = new JTextArea(35, 40);
+        outputText.setBackground(new Color(0, 0, 0, 0));
 
         setLayout(new BorderLayout());
-        add( outputText, BorderLayout.PAGE_END );
+        add(outputText, BorderLayout.PAGE_END);
 
+        balls = new ArrayList<>();
 
-
-        ball = new Ball(this);
+        balls.add(new Ball(this));
 
         makeBricks();
-        paddle = new Paddle(ball, this);
+        paddle = new Paddle(balls, this);
 
 
         onClearBricksListners.add(e -> {
-            ball.reset();
+            resetBalls();
             makeBricks();
             lives++;
             score += 100;
@@ -85,19 +84,20 @@ public class Board extends JPanel implements Runnable {
             resetGame();
         });
 
-        onOutOfBoundsListners.add(e -> {
+        onOutOfBallsListners.add(e -> {
             lives--;
             score -= 100;
-            ball.reset();
+            resetBalls();
         });
 
         game = new Thread(this);
         game.start();
 
+    }
 
-
-
-
+    private void resetBalls() {
+        balls.clear();
+        balls.add(new Ball(this));
     }
 
     //fills the array of bricks
@@ -109,7 +109,7 @@ public class Board extends JPanel implements Runnable {
 
         for (int i = 0; i < horizontalBricks; i++) {
             for (int j = 0; j < 5; j++) {
-                Brick brick = new Brick(i, j, ball);
+                Brick brick = new Brick(i, j, balls);
 
                 brick.onDestoryEvents.add(e -> {
                     bricksLeft--;
@@ -122,13 +122,22 @@ public class Board extends JPanel implements Runnable {
         }
     }
 
+    public void splitBall() {
+        Ball aBall = balls.get(0);
+        Ball newBall = new Ball(this, aBall.x, aBall.y,aBall.getWidth(), aBall.getHeight(), aBall.getColor());
+        newBall.invertX();
+        balls.add(newBall);
+
+    }
 
     //runs the game
     public void run() {
         while (true) {
 
             paddle.tick();
-            ball.tick();
+            for (Ball ball : balls) {
+                ball.tick();
+            }
 
             for (Brick brick : bricks) {
                 brick.checkCollisions();
@@ -138,7 +147,7 @@ public class Board extends JPanel implements Runnable {
                 item.tick();
             }
             checkItemList();
-
+            checkBallsList();
             checkLives();
 
 
@@ -148,8 +157,8 @@ public class Board extends JPanel implements Runnable {
             List<String> tail = logMessages.subList(Math.max(logMessages.size() - 30, 0), logMessages.size());
 
 
-            for(String log : tail){
-                outputText.append( log );
+            for (String log : tail) {
+                outputText.append(log);
             }
 
             try {
@@ -157,7 +166,6 @@ public class Board extends JPanel implements Runnable {
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
-
 
 
         }
@@ -178,6 +186,20 @@ public class Board extends JPanel implements Runnable {
         }
     }
 
+    public void checkBallsList() {
+        for (int i = 0; i < balls.size(); i++) {
+            Ball tempBall = balls.get(i);
+            if (tempBall.destroyed) {
+                balls.remove(i);
+            }
+        }
+        if (balls.size() == 0) {
+            for (ActionListener onOutOfBounds : onOutOfBallsListners) {
+                onOutOfBounds.actionPerformed(new ActionEvent(this, 0, "on out of bounds"));
+            }
+        }
+    }
+
     public void checkLives() {
         if (bricksLeft == 0) {
             for (ActionListener onClearBricks : onClearBricksListners) {
@@ -191,11 +213,11 @@ public class Board extends JPanel implements Runnable {
         }
     }
 
-    public void outOfBounds() {
-        for (ActionListener onOutOfBounds : onOutOfBoundsListners) {
-            onOutOfBounds.actionPerformed(new ActionEvent(this, 0, "on out of bounds"));
-        }
-    }
+//    public void outOfBounds() {
+//        for (ActionListener onOutOfBounds : onOutOfBallsListners) {
+//            onOutOfBounds.actionPerformed(new ActionEvent(this, 0, "on out of bounds"));
+//        }
+//    }
 
     //fills the board
     @Override
@@ -203,7 +225,10 @@ public class Board extends JPanel implements Runnable {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
         paddle.draw(g);
-        ball.draw(g);
+
+        for (Ball ball : balls) {
+            ball.draw(g);
+        }
 
         for (Brick brick : bricks) {
             brick.draw(g);
@@ -212,8 +237,6 @@ public class Board extends JPanel implements Runnable {
 
         g.drawString("Lives: " + lives, Constants.WINDOW_WIDTH - 140, getHeight() - (getHeight() / 10));
         g.drawString("Score: " + score, Constants.WINDOW_WIDTH - 140, getHeight() - (2 * (getHeight() / 10)) + 25);
-
-
 
 
         for (Item i : items) {
@@ -240,13 +263,16 @@ public class Board extends JPanel implements Runnable {
             if (key == KeyEvent.VK_LEFT) {
                 paddle.stepLeft();
             }
+            if (key == KeyEvent.VK_S) {
+                splitBall();
+            }
             if (key == KeyEvent.VK_RIGHT) {
                 paddle.stepRight();
             }
             if (key == KeyEvent.VK_SPACE) {
-                if(!paused){
+                if (!paused) {
                     game.suspend();
-                }else{
+                } else {
                     game.resume();
                 }
                 paused = !paused;

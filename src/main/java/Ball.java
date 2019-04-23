@@ -24,7 +24,6 @@
 
 //Imports
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -34,12 +33,18 @@ public class Ball extends Structure {
     private boolean onScreen;
     private float xDir = 1, yDir = -1;
     private Board parent;
+    public boolean destroyed;
 
     long startTime;
 
 
     public Ball(Board parent) {
         this(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
+        this.parent = parent;
+    }
+
+    public Ball(Board parent, int x, int y, int width, int height, Color color) {
+        this(x,  y,  width,  height, color);
         this.parent = parent;
     }
 
@@ -141,7 +146,7 @@ public class Ball extends Structure {
         }
 
         if (getY() > Constants.PADDLE_Y_START + 10) {
-            parent.outOfBounds();
+            destroyed = true;
         }
     }
 

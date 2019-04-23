@@ -1,3 +1,5 @@
+import java.util.List;
+
 enum Decision {
     MOVE_LEFT,
     MOVE_RIGHT,
@@ -6,7 +8,7 @@ enum Decision {
 
 public class PaddleController {
 
-    private Ball ball;
+    private List<Ball> balls;
     private Paddle paddle;
     private Board board;
 
@@ -15,28 +17,30 @@ public class PaddleController {
     int paddleXMiddle;
     int paddleYMiddle;
 
-    int acceleration = 1;
+    int acceleration = 2;
 
-    public PaddleController(Ball ball, Paddle paddle, Board board) {
-        this.ball = ball;
+    public PaddleController(List<Ball> balls, Paddle paddle, Board board) {
+        this.balls = balls;
         this.paddle = paddle;
         this.board = board;
     }
 
     public void MoveTowardBall() {
-        ballXMiddle = ball.getXMiddle();
-        ballYMiddle = ball.getYMiddle();
+//        ballXMiddle = ball.getXMiddle();
+//        ballYMiddle = ball.getYMiddle();
         paddleXMiddle = paddle.getXMiddle();
         paddleYMiddle = paddle.getYMiddle();
 
         Decision decision = makeDecision();
 
-        String logMessage = "BP: (" + ballXMiddle + ", " + ballYMiddle + ")"
-                + " PP: (" + paddleXMiddle + ", " + paddleYMiddle + ")"
-                + " Decision: " + (decision)
-                + "\n";
+//        "BP: (" + ballXMiddle + ", " + ballYMiddle + ")"
+//                +
 
-        board.logMessages.add(logMessage);
+//        String logMessage = " PP: (" + paddleXMiddle + ", " + paddleYMiddle + ")"
+//                + " Decision: " + (decision)
+//                + "\n";
+//
+//        board.logMessages.add(logMessage);
 
         switch (decision) {
             case MOVE_LEFT:
@@ -53,7 +57,7 @@ public class PaddleController {
     }
 
     private Decision makeDecision() {
-        int smallBuffer = Constants.PADDLE_WIDTH / 10;
+        int smallBuffer = paddle.getWidth() / 5;
         Range paddleRange = new Range(paddle.x + smallBuffer, paddle.x + paddle.getWidth() - smallBuffer);
 
         for (Item item : board.items){
@@ -65,17 +69,25 @@ public class PaddleController {
             // Do stuff with items
         }
 
-        if (paddleRange.contains(ballXMiddle)) {
-            return Decision.DO_NOTHING;
+        for (Ball ball : balls){
+            ballXMiddle = ball.getXMiddle();
+            ballYMiddle = ball.getYMiddle();
+
+
+            if (paddleRange.contains(ballXMiddle)) {
+                return Decision.DO_NOTHING;
+            }
+
+            if (ballXMiddle < paddleXMiddle) {
+                return Decision.MOVE_LEFT;
+            }
+
+            if (ballXMiddle > paddleXMiddle) {
+                return Decision.MOVE_RIGHT;
+            }
         }
 
-        if (ballXMiddle < paddleXMiddle) {
-            return Decision.MOVE_LEFT;
-        }
 
-        if (ballXMiddle > paddleXMiddle) {
-            return Decision.MOVE_RIGHT;
-        }
 
         return Decision.DO_NOTHING;
     }

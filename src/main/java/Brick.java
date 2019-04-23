@@ -41,14 +41,14 @@ public class Brick extends Structure {
     private Color itemColor;
     private int row;
     private int col;
-    private Ball ball;
+    private List<Ball> balls;
 
     List<ActionListener> onDestoryEvents = new ArrayList<>();
 
     //Colors for the bricks
 
 
-    public Brick(int row, int col, Ball ball) {
+    public Brick(int row, int col, List<Ball> balls) {
         this(
                 (row * Constants.BRICK_WIDTH),
                 ((col * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
@@ -56,27 +56,34 @@ public class Brick extends Structure {
                 Constants.BRICK_HEIGHT - 5,
                 Constants.colors[(new Random()).nextInt(7)][0],
                 1,
-                (new Random()).nextInt(2) + 1);
+                ItemType.getRandom());
 
-        this.ball = ball;
+        this.balls = balls;
         this.row = row;
         this.col = col;
     }
 
 
     //Constructor
-    public Brick(int x, int y, int width, int height, Color color, int lives, int itemType) {
+    public Brick(int x, int y, int width, int height, Color color, int lives, ItemType itemType) {
         super(x, y, width, height, color);
         setLives(lives);
         setHits(0);
         setDestroyed(false);
 
-        if (itemType == 1) {
-            itemColor = Color.GREEN;
+
+        switch(itemType){
+            case INCREASE_SIZE:
+                itemColor = Color.GREEN;
+                break;
+            case DECREASE_SIZE:
+                itemColor = Color.RED;
+                break;
+            case SPLIT_BALL:
+                itemColor = Color.YELLOW;
+                break;
         }
-        if (itemType == 2) {
-            itemColor = Color.RED;
-        }
+
 
         //Places an item of specified type inside the brick to fall when the brick is destroyed
         item = new Item(x + (width / 4), y + (height / 4), Constants.ITEM_WIDTH, Constants.ITEM_HEIGHT, itemColor, itemType);
@@ -125,14 +132,17 @@ public class Brick extends Structure {
     }
 
     public void checkCollisions(){
-        int x1 = ball.getX();
-        int y1 = ball.getY();
 
-        if (hitBottomTop(x1, y1)) {
-            ball.invertY();
-        }
-        if (hitLeftRight(x1, y1)) {
-            ball.invertX();
+        for(Ball ball: balls){
+            int x1 = ball.getX();
+            int y1 = ball.getY();
+
+            if (hitBottomTop(x1, y1)) {
+                ball.invertY();
+            }
+            if (hitLeftRight(x1, y1)) {
+                ball.invertX();
+            }
         }
     }
 

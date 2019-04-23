@@ -24,14 +24,29 @@
 
 //Imports
 import java.awt.*;
+import java.util.Random;
+
+
+enum ItemType {
+	INCREASE_SIZE,
+	DECREASE_SIZE,
+	SPLIT_BALL;
+
+
+	public static ItemType getRandom() {
+		Random random = new Random();
+		return values()[random.nextInt(values().length)];
+	}
+
+}
 
 //Class definition
 public class Item extends Structure {
 	//Variables
-	private int type;
+	private ItemType type;
 
 	//Constructor
-	public Item(int x, int y, int width, int height, Color color, int type) {
+	public Item(int x, int y, int width, int height, Color color, ItemType type) {
 		super(x, y, width, height, color);
 		setType(type);
 	}
@@ -43,25 +58,38 @@ public class Item extends Structure {
 
 	//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.
 	public void resizePaddle(Paddle p) {
-		if (getType() == 1 && p.getWidth() < Constants.PADDLE_MAX) {
-			p.setWidth(p.getWidth() + 15);
-		}
-		else if (getType() == 2 && p.getWidth() > Constants.PADDLE_MIN) {
-			p.setWidth(p.getWidth() - 15);
+		switch(type){
+			case INCREASE_SIZE:
+				p.setWidth(p.getWidth() + 15);
+				break;
+			case DECREASE_SIZE:
+				p.setWidth(p.getWidth() - 15);
+				break;
 		}
 	}
 
+	public boolean split(){
+		return type == ItemType.SPLIT_BALL;
+	}
+
 	//Set the item's type
-	public void setType(int type) {
+	public void setType(ItemType type) {
 		this.type = type;
 	}
 
 	//Get the item's type
-	public int getType() {
+	public ItemType getType() {
 		return type;
 	}
 
 	public boolean isGood(){
-		return getType() == 1;
+		switch(type){
+			case INCREASE_SIZE:
+			case SPLIT_BALL:
+				return true;
+			case DECREASE_SIZE:
+				return false;
+		}
+		return false;
 	}
 }
