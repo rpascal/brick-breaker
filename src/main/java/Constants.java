@@ -29,7 +29,7 @@ import java.awt.Color;
 public class Constants {
 	//Window Size
 	public static final int WINDOW_WIDTH = 750;
-	public static final int WINDOW_HEIGHT = 750;
+	public static final int WINDOW_HEIGHT = 850;
 
 	//Lives
 	public static final int MAX_LIVES = 1;
@@ -47,7 +47,7 @@ public class Constants {
 	public static final int PADDLE_HEIGHT = 10;
 	public static final int PADDLE_RIGHT_BOUND = 430;
 	public static final int PADDLE_X_START = WINDOW_WIDTH / 2;
-	public static final int PADDLE_Y_START = (WINDOW_HEIGHT - PADDLE_HEIGHT - 40);
+	public static final int PADDLE_Y_START = (WINDOW_HEIGHT - PADDLE_HEIGHT - 80);
 	public static final int PADDLE_MIN = 35;
 	public static final int PADDLE_MAX = 140;
 
