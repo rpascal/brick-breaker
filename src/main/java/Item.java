@@ -53,7 +53,7 @@ public class Item extends Structure {
 
 	//Drop the item down towards the paddle at slow pace
 	public void tick() {
-		y += 1;
+		y += 2;
 	}
 
 	//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.

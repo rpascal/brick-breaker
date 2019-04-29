@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 enum Decision {
@@ -9,13 +10,33 @@ enum Decision {
 
 class PredictionValues {
     Decision decision;
-    int yToPaddle;
-    int xToPaddle;
+    int yDist;
+    int xDist;
+    boolean isTravelingUp;
     boolean isBall;
     boolean isGood;
 
     public int getValue() {
-        return 0;
+        if(xDist > yDist && !isBall){
+            return 0; // Cant make it
+        }
+
+        int p = 0;
+
+        if(isBall){
+            p += 50;
+        }
+
+        if(isTravelingUp){
+            p -= 45;
+        }
+
+        int heightOfWindow = Constants.WINDOW_HEIGHT;
+
+        p += heightOfWindow - yDist;
+
+        // figure out logic here => HIGHER = better
+        return p;
     }
 
 }
@@ -81,56 +102,79 @@ public class PaddleController {
         List<PredictionValues> chooses = new ArrayList<>();
 
         for (Item item : board.items) {
-//            if(item.isGood()){
-//
-//            }else{
-//
-//            }
+
+            Decision d = Decision.DO_NOTHING;
+            if(item.isGood()){
+                if (paddleRange.contains(item.getXMiddle())) {
+                    d = Decision.DO_NOTHING;
+                }
+
+                if (item.getXMiddle() < paddleXMiddle) {
+                    d =  Decision.MOVE_LEFT;
+                }
+
+                if (item.getXMiddle() > paddleXMiddle) {
+                    d =  Decision.MOVE_RIGHT;
+                }
+            }else{
+                if (paddleRange.contains(item.getXMiddle())) {
+                    d = Decision.MOVE_RIGHT;
+                }
+
+                if (item.getXMiddle() < paddleXMiddle) {
+                    d =  Decision.MOVE_RIGHT;
+                }
+
+                if (item.getXMiddle() > paddleXMiddle) {
+                    d =  Decision.MOVE_LEFT;
+                }
+            }
+
+
             PredictionValues prediction = new PredictionValues();
             prediction.isGood = item.isGood();
-            prediction.xToPaddle = absDiff(item.getXMiddle(), paddleXMiddle);
-            prediction.yToPaddle = absDiff(item.getYMiddle(), paddleYMiddle);
+            prediction.xDist = absDiff(item.getXMiddle(), paddleXMiddle);
+            prediction.yDist = absDiff(item.getYMiddle(), paddleYMiddle);
             prediction.isBall = false;
+            prediction.isTravelingUp = false;
+            prediction.decision = d;
 
             chooses.add(prediction);
 
-            // Do stuff with items
         }
 
         for (Ball ball : balls) {
             int ballXMiddle = ball.getXMiddle();
             int ballYMiddle = ball.getYMiddle();
 
+            Decision d = Decision.DO_NOTHING;
+            if (paddleRange.contains(ballXMiddle)) {
+                d = Decision.DO_NOTHING;
+            }
+
+            if (ballXMiddle < paddleXMiddle) {
+                d =  Decision.MOVE_LEFT;
+            }
+
+            if (ballXMiddle > paddleXMiddle) {
+                d =  Decision.MOVE_RIGHT;
+            }
 
             PredictionValues prediction = new PredictionValues();
-            prediction.isGood = true;
-            prediction.xToPaddle = absDiff(ballXMiddle, paddleXMiddle);
-            prediction.yToPaddle = absDiff(ballYMiddle, paddleYMiddle);
+            prediction.isGood = false;
+            prediction.xDist = absDiff(ballXMiddle, paddleXMiddle);
+            prediction.yDist = absDiff(ballYMiddle, paddleYMiddle);
             prediction.isBall = true;
+            prediction.isTravelingUp = ball.getY() < 0;
+            prediction.decision = d;
 
             chooses.add(prediction);
-
-
         }
 
 
+        PredictionValues prediction = chooses.stream().max(Comparator.comparing(PredictionValues::getValue)).get();
+        return  prediction.decision;
 
-
-//
-//        if (paddleRange.contains(ballXMiddle)) {
-//            return Decision.DO_NOTHING;
-//        }
-//
-//        if (ballXMiddle < paddleXMiddle) {
-//            return Decision.MOVE_LEFT;
-//        }
-//
-//        if (ballXMiddle > paddleXMiddle) {
-//            return Decision.MOVE_RIGHT;
-//        }
-
-
-        return Decision.DO_NOTHING;
     }
 
 }
