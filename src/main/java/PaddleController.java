@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 enum Decision {
@@ -6,14 +7,27 @@ enum Decision {
     DO_NOTHING
 }
 
+class PredictionValues {
+    Decision decision;
+    int yToPaddle;
+    int xToPaddle;
+    boolean isBall;
+    boolean isGood;
+
+    public int getValue() {
+        return 0;
+    }
+
+}
+
 public class PaddleController {
 
     private List<Ball> balls;
     private Paddle paddle;
     private Board board;
 
-    int ballXMiddle;
-    int ballYMiddle;
+    //    int ballXMiddle;
+//    int ballYMiddle;
     int paddleXMiddle;
     int paddleYMiddle;
 
@@ -56,37 +70,64 @@ public class PaddleController {
 
     }
 
+    private int absDiff(int a, int b) {
+        return Math.abs(a - b);
+    }
+
     private Decision makeDecision() {
         int smallBuffer = paddle.getWidth() / 5;
         Range paddleRange = new Range(paddle.x + smallBuffer, paddle.x + paddle.getWidth() - smallBuffer);
 
-        for (Item item : board.items){
-            if(item.isGood()){
+        List<PredictionValues> chooses = new ArrayList<>();
 
-            }else{
+        for (Item item : board.items) {
+//            if(item.isGood()){
+//
+//            }else{
+//
+//            }
+            PredictionValues prediction = new PredictionValues();
+            prediction.isGood = item.isGood();
+            prediction.xToPaddle = absDiff(item.getXMiddle(), paddleXMiddle);
+            prediction.yToPaddle = absDiff(item.getYMiddle(), paddleYMiddle);
+            prediction.isBall = false;
 
-            }
+            chooses.add(prediction);
+
             // Do stuff with items
         }
 
-        for (Ball ball : balls){
-            ballXMiddle = ball.getXMiddle();
-            ballYMiddle = ball.getYMiddle();
+        for (Ball ball : balls) {
+            int ballXMiddle = ball.getXMiddle();
+            int ballYMiddle = ball.getYMiddle();
 
 
-            if (paddleRange.contains(ballXMiddle)) {
-                return Decision.DO_NOTHING;
-            }
+            PredictionValues prediction = new PredictionValues();
+            prediction.isGood = true;
+            prediction.xToPaddle = absDiff(ballXMiddle, paddleXMiddle);
+            prediction.yToPaddle = absDiff(ballYMiddle, paddleYMiddle);
+            prediction.isBall = true;
 
-            if (ballXMiddle < paddleXMiddle) {
-                return Decision.MOVE_LEFT;
-            }
+            chooses.add(prediction);
 
-            if (ballXMiddle > paddleXMiddle) {
-                return Decision.MOVE_RIGHT;
-            }
+
         }
 
+
+
+
+//
+//        if (paddleRange.contains(ballXMiddle)) {
+//            return Decision.DO_NOTHING;
+//        }
+//
+//        if (ballXMiddle < paddleXMiddle) {
+//            return Decision.MOVE_LEFT;
+//        }
+//
+//        if (ballXMiddle > paddleXMiddle) {
+//            return Decision.MOVE_RIGHT;
+//        }
 
 
         return Decision.DO_NOTHING;
