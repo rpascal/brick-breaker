@@ -21,6 +21,9 @@ class PredictionValues {
             return 0; // Cant make it
         }
 
+        System.out.println("y distance: " + yDist + " x distance: " + xDist);
+
+
         int p = 0;
 
         if(isBall){
@@ -61,21 +64,10 @@ public class PaddleController {
     }
 
     public void MoveTowardBall() {
-//        ballXMiddle = ball.getXMiddle();
-//        ballYMiddle = ball.getYMiddle();
         paddleXMiddle = paddle.getXMiddle();
         paddleYMiddle = paddle.getYMiddle();
 
         Decision decision = makeDecision();
-
-//        "BP: (" + ballXMiddle + ", " + ballYMiddle + ")"
-//                +
-
-//        String logMessage = " PP: (" + paddleXMiddle + ", " + paddleYMiddle + ")"
-//                + " Decision: " + (decision)
-//                + "\n";
-//
-//        board.logMessages.add(logMessage);
 
         switch (decision) {
             case MOVE_LEFT:
@@ -173,6 +165,10 @@ public class PaddleController {
 
 
         PredictionValues prediction = chooses.stream().max(Comparator.comparing(PredictionValues::getValue)).get();
+
+
+        System.out.println("Decision is: " + prediction.decision);
+
         return  prediction.decision;
 
     }
